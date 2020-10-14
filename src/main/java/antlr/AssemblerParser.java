@@ -1,13 +1,11 @@
-// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/calculator/Assembler.g4 by ANTLR 4.8
-package calculator;
+// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/grammar/Assembler.g4 by ANTLR 4.8
+package antlr;
+import grammar.AssemblerVisitor;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
-import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class AssemblerParser extends Parser {
@@ -18,16 +16,19 @@ public class AssemblerParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, AX=3, AL=4, AH=5, BX=6, BH=7, BL=8, CX=9, CH=10, CL=11, 
-		DS=12, DX=13, DH=14, DL=15, CS=16, CP=17, SS=18, SP=19, ID=20, NUMBER=21, 
-		HEX_NUMBER=22, INT=23, NEWLINE=24, WS=25;
+		DX=12, DH=13, DL=14, CS=15, CP=16, SS=17, SP=18, DS=19, DP=20, NUMBER=21, 
+		HEX_NUMBER=22, INT=23, NEWLINE=24, WS=25, PUSH=26, POP=27, MOV=28, ADD=29, 
+		SUB=30, DIV=31, MUL=32, CALL=33, RET=34, JMP=35, ID=36;
 	public static final int
-		RULE_programm = 0, RULE_stat = 1, RULE_labelDef = 2, RULE_unaryExpr = 3, 
-		RULE_binaryExpr = 4, RULE_instruction = 5, RULE_register = 6, RULE_commonRegister = 7, 
-		RULE_codeRegister = 8, RULE_stackRegister = 9, RULE_dataRegister = 10;
+		RULE_programm = 0, RULE_stat = 1, RULE_labelDef = 2, RULE_unaryOperation = 3, 
+		RULE_unaryOperator = 4, RULE_binaryOperation = 5, RULE_binaryOperator = 6, 
+		RULE_instruction = 7, RULE_register = 8, RULE_commonRegister = 9, RULE_codeRegister = 10, 
+		RULE_stackRegister = 11, RULE_dataRegister = 12;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"programm", "stat", "labelDef", "unaryExpr", "binaryExpr", "instruction", 
-			"register", "commonRegister", "codeRegister", "stackRegister", "dataRegister"
+			"programm", "stat", "labelDef", "unaryOperation", "unaryOperator", "binaryOperation", 
+			"binaryOperator", "instruction", "register", "commonRegister", "codeRegister", 
+			"stackRegister", "dataRegister"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -41,8 +42,9 @@ public class AssemblerParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, "AX", "AL", "AH", "BX", "BH", "BL", "CX", "CH", "CL", 
-			"DS", "DX", "DH", "DL", "CS", "CP", "SS", "SP", "ID", "NUMBER", "HEX_NUMBER", 
-			"INT", "NEWLINE", "WS"
+			"DX", "DH", "DL", "CS", "CP", "SS", "SP", "DS", "DP", "NUMBER", "HEX_NUMBER", 
+			"INT", "NEWLINE", "WS", "PUSH", "POP", "MOV", "ADD", "SUB", "DIV", "MUL", 
+			"CALL", "RET", "JMP", "ID"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -117,7 +119,7 @@ public class AssemblerParser extends Parser {
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitProgramm(this);
+			if ( visitor instanceof AssemblerVisitor) return ((AssemblerVisitor<? extends T>)visitor).visitProgramm(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -129,20 +131,20 @@ public class AssemblerParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(23); 
+			setState(27); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(22);
+				setState(26);
 				stat();
 				}
 				}
-				setState(25); 
+				setState(29); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==ID );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PUSH) | (1L << POP) | (1L << MOV) | (1L << ADD) | (1L << SUB) | (1L << DIV) | (1L << MUL) | (1L << CALL) | (1L << RET) | (1L << JMP) | (1L << ID))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -157,18 +159,18 @@ public class AssemblerParser extends Parser {
 	}
 
 	public static class StatContext extends ParserRuleContext {
-		public LabelDefContext labelDef() {
-			return getRuleContext(LabelDefContext.class,0);
+		public UnaryOperationContext unaryOperation() {
+			return getRuleContext(UnaryOperationContext.class,0);
 		}
 		public TerminalNode NEWLINE() { return getToken(AssemblerParser.NEWLINE, 0); }
-		public UnaryExprContext unaryExpr() {
-			return getRuleContext(UnaryExprContext.class,0);
-		}
-		public BinaryExprContext binaryExpr() {
-			return getRuleContext(BinaryExprContext.class,0);
+		public BinaryOperationContext binaryOperation() {
+			return getRuleContext(BinaryOperationContext.class,0);
 		}
 		public InstructionContext instruction() {
 			return getRuleContext(InstructionContext.class,0);
+		}
+		public LabelDefContext labelDef() {
+			return getRuleContext(LabelDefContext.class,0);
 		}
 		public StatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -193,45 +195,54 @@ public class AssemblerParser extends Parser {
 		StatContext _localctx = new StatContext(_ctx, getState());
 		enterRule(_localctx, 2, RULE_stat);
 		try {
-			setState(39);
+			setState(43);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,1,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case PUSH:
+			case POP:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(27);
-				labelDef();
-				setState(28);
+				setState(31);
+				unaryOperation();
+				setState(32);
 				match(NEWLINE);
 				}
 				break;
-			case 2:
+			case MOV:
+			case ADD:
+			case SUB:
+			case DIV:
+			case MUL:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(30);
-				unaryExpr();
-				setState(31);
+				setState(34);
+				binaryOperation();
+				setState(35);
 				match(NEWLINE);
 				}
 				break;
-			case 3:
+			case CALL:
+			case RET:
+			case JMP:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(33);
-				binaryExpr();
-				setState(34);
+				setState(37);
+				instruction();
+				setState(38);
 				match(NEWLINE);
 				}
 				break;
-			case 4:
+			case ID:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(36);
-				instruction();
-				setState(37);
+				setState(40);
+				labelDef();
+				setState(41);
 				match(NEWLINE);
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -247,7 +258,6 @@ public class AssemblerParser extends Parser {
 
 	public static class LabelDefContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(AssemblerParser.ID, 0); }
-		public TerminalNode NEWLINE() { return getToken(AssemblerParser.NEWLINE, 0); }
 		public LabelDefContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -273,12 +283,10 @@ public class AssemblerParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(41);
+			setState(45);
 			match(ID);
-			setState(42);
+			setState(46);
 			match(T__0);
-			setState(43);
-			match(NEWLINE);
 			}
 		}
 		catch (RecognitionException re) {
@@ -292,80 +300,84 @@ public class AssemblerParser extends Parser {
 		return _localctx;
 	}
 
-	public static class UnaryExprContext extends ParserRuleContext {
-		public UnaryExprContext(ParserRuleContext parent, int invokingState) {
+	public static class UnaryOperationContext extends ParserRuleContext {
+		public UnaryOperationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_unaryExpr; }
+		@Override public int getRuleIndex() { return RULE_unaryOperation; }
 	 
-		public UnaryExprContext() { }
-		public void copyFrom(UnaryExprContext ctx) {
+		public UnaryOperationContext() { }
+		public void copyFrom(UnaryOperationContext ctx) {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class UnaryExprConstContext extends UnaryExprContext {
-		public TerminalNode ID() { return getToken(AssemblerParser.ID, 0); }
-		public TerminalNode NUMBER() { return getToken(AssemblerParser.NUMBER, 0); }
-		public UnaryExprConstContext(UnaryExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterUnaryExprConst(this);
+	public static class UnaryOperationRegisterContext extends UnaryOperationContext {
+		public UnaryOperatorContext unaryOperator() {
+			return getRuleContext(UnaryOperatorContext.class,0);
 		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitUnaryExprConst(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitUnaryExprConst(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class UnaryExprRegisterContext extends UnaryExprContext {
-		public TerminalNode ID() { return getToken(AssemblerParser.ID, 0); }
 		public RegisterContext register() {
 			return getRuleContext(RegisterContext.class,0);
 		}
-		public UnaryExprRegisterContext(UnaryExprContext ctx) { copyFrom(ctx); }
+		public UnaryOperationRegisterContext(UnaryOperationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterUnaryExprRegister(this);
+			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterUnaryOperationRegister(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitUnaryExprRegister(this);
+			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitUnaryOperationRegister(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitUnaryExprRegister(this);
+			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitUnaryOperationRegister(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+	public static class UnaryOperationConstContext extends UnaryOperationContext {
+		public UnaryOperatorContext unaryOperator() {
+			return getRuleContext(UnaryOperatorContext.class,0);
+		}
+		public TerminalNode NUMBER() { return getToken(AssemblerParser.NUMBER, 0); }
+		public UnaryOperationConstContext(UnaryOperationContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterUnaryOperationConst(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitUnaryOperationConst(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitUnaryOperationConst(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final UnaryExprContext unaryExpr() throws RecognitionException {
-		UnaryExprContext _localctx = new UnaryExprContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_unaryExpr);
+	public final UnaryOperationContext unaryOperation() throws RecognitionException {
+		UnaryOperationContext _localctx = new UnaryOperationContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_unaryOperation);
 		try {
-			setState(49);
+			setState(54);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
 			case 1:
-				_localctx = new UnaryExprConstContext(_localctx);
+				_localctx = new UnaryOperationConstContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(45);
-				match(ID);
-				setState(46);
+				setState(48);
+				unaryOperator();
+				setState(49);
 				match(NUMBER);
 				}
 				break;
 			case 2:
-				_localctx = new UnaryExprRegisterContext(_localctx);
+				_localctx = new UnaryOperationRegisterContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(47);
-				match(ID);
-				setState(48);
+				setState(51);
+				unaryOperator();
+				setState(52);
 				register();
 				}
 				break;
@@ -382,24 +394,78 @@ public class AssemblerParser extends Parser {
 		return _localctx;
 	}
 
-	public static class BinaryExprContext extends ParserRuleContext {
-		public BinaryExprContext(ParserRuleContext parent, int invokingState) {
+	public static class UnaryOperatorContext extends ParserRuleContext {
+		public TerminalNode PUSH() { return getToken(AssemblerParser.PUSH, 0); }
+		public TerminalNode POP() { return getToken(AssemblerParser.POP, 0); }
+		public UnaryOperatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_binaryExpr; }
+		@Override public int getRuleIndex() { return RULE_unaryOperator; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterUnaryOperator(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitUnaryOperator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitUnaryOperator(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final UnaryOperatorContext unaryOperator() throws RecognitionException {
+		UnaryOperatorContext _localctx = new UnaryOperatorContext(_ctx, getState());
+		enterRule(_localctx, 8, RULE_unaryOperator);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(56);
+			_la = _input.LA(1);
+			if ( !(_la==PUSH || _la==POP) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class BinaryOperationContext extends ParserRuleContext {
+		public BinaryOperationContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_binaryOperation; }
 	 
-		public BinaryExprContext() { }
-		public void copyFrom(BinaryExprContext ctx) {
+		public BinaryOperationContext() { }
+		public void copyFrom(BinaryOperationContext ctx) {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class BinaryExprRegisterConstContext extends BinaryExprContext {
-		public TerminalNode ID() { return getToken(AssemblerParser.ID, 0); }
+	public static class BinaryExprRegisterConstContext extends BinaryOperationContext {
+		public BinaryOperatorContext binaryOperator() {
+			return getRuleContext(BinaryOperatorContext.class,0);
+		}
 		public RegisterContext register() {
 			return getRuleContext(RegisterContext.class,0);
 		}
 		public TerminalNode NUMBER() { return getToken(AssemblerParser.NUMBER, 0); }
-		public BinaryExprRegisterConstContext(BinaryExprContext ctx) { copyFrom(ctx); }
+		public BinaryExprRegisterConstContext(BinaryOperationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterBinaryExprRegisterConst(this);
@@ -414,15 +480,17 @@ public class AssemblerParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class BinaryExprRegistersContext extends BinaryExprContext {
-		public TerminalNode ID() { return getToken(AssemblerParser.ID, 0); }
+	public static class BinaryExprRegistersContext extends BinaryOperationContext {
+		public BinaryOperatorContext binaryOperator() {
+			return getRuleContext(BinaryOperatorContext.class,0);
+		}
 		public List<RegisterContext> register() {
 			return getRuleContexts(RegisterContext.class);
 		}
 		public RegisterContext register(int i) {
 			return getRuleContext(RegisterContext.class,i);
 		}
-		public BinaryExprRegistersContext(BinaryExprContext ctx) { copyFrom(ctx); }
+		public BinaryExprRegistersContext(BinaryOperationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
 			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterBinaryExprRegisters(this);
@@ -438,24 +506,24 @@ public class AssemblerParser extends Parser {
 		}
 	}
 
-	public final BinaryExprContext binaryExpr() throws RecognitionException {
-		BinaryExprContext _localctx = new BinaryExprContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_binaryExpr);
+	public final BinaryOperationContext binaryOperation() throws RecognitionException {
+		BinaryOperationContext _localctx = new BinaryOperationContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_binaryOperation);
 		try {
-			setState(61);
+			setState(68);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
 				_localctx = new BinaryExprRegistersContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(51);
-				match(ID);
-				setState(52);
+				setState(58);
+				binaryOperator();
+				setState(59);
 				register();
-				setState(53);
+				setState(60);
 				match(T__1);
-				setState(54);
+				setState(61);
 				register();
 				}
 				break;
@@ -463,13 +531,13 @@ public class AssemblerParser extends Parser {
 				_localctx = new BinaryExprRegisterConstContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(56);
-				match(ID);
-				setState(57);
+				setState(63);
+				binaryOperator();
+				setState(64);
 				register();
-				setState(58);
+				setState(65);
 				match(T__1);
-				setState(59);
+				setState(66);
 				match(NUMBER);
 				}
 				break;
@@ -486,8 +554,65 @@ public class AssemblerParser extends Parser {
 		return _localctx;
 	}
 
+	public static class BinaryOperatorContext extends ParserRuleContext {
+		public TerminalNode MOV() { return getToken(AssemblerParser.MOV, 0); }
+		public TerminalNode ADD() { return getToken(AssemblerParser.ADD, 0); }
+		public TerminalNode SUB() { return getToken(AssemblerParser.SUB, 0); }
+		public TerminalNode DIV() { return getToken(AssemblerParser.DIV, 0); }
+		public TerminalNode MUL() { return getToken(AssemblerParser.MUL, 0); }
+		public BinaryOperatorContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_binaryOperator; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterBinaryOperator(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitBinaryOperator(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitBinaryOperator(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final BinaryOperatorContext binaryOperator() throws RecognitionException {
+		BinaryOperatorContext _localctx = new BinaryOperatorContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_binaryOperator);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(70);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MOV) | (1L << ADD) | (1L << SUB) | (1L << DIV) | (1L << MUL))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static class InstructionContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(AssemblerParser.ID, 0); }
+		public TerminalNode CALL() { return getToken(AssemblerParser.CALL, 0); }
+		public TerminalNode RET() { return getToken(AssemblerParser.RET, 0); }
+		public TerminalNode JMP() { return getToken(AssemblerParser.JMP, 0); }
 		public InstructionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -509,12 +634,21 @@ public class AssemblerParser extends Parser {
 
 	public final InstructionContext instruction() throws RecognitionException {
 		InstructionContext _localctx = new InstructionContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_instruction);
+		enterRule(_localctx, 14, RULE_instruction);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
-			match(ID);
+			setState(72);
+			_la = _input.LA(1);
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CALL) | (1L << RET) | (1L << JMP))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -562,39 +696,55 @@ public class AssemblerParser extends Parser {
 
 	public final RegisterContext register() throws RecognitionException {
 		RegisterContext _localctx = new RegisterContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_register);
+		enterRule(_localctx, 16, RULE_register);
 		try {
-			setState(69);
+			setState(78);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
-			case 1:
+			switch (_input.LA(1)) {
+			case AX:
+			case AL:
+			case AH:
+			case BX:
+			case BH:
+			case BL:
+			case CX:
+			case CH:
+			case CL:
+			case DX:
+			case DH:
+			case DL:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(65);
+				setState(74);
 				commonRegister();
 				}
 				break;
-			case 2:
+			case CS:
+			case CP:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(66);
+				setState(75);
 				codeRegister();
 				}
 				break;
-			case 3:
+			case SS:
+			case SP:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(67);
+				setState(76);
 				stackRegister();
 				}
 				break;
-			case 4:
+			case DS:
+			case DP:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(68);
+				setState(77);
 				dataRegister();
 				}
 				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -642,12 +792,12 @@ public class AssemblerParser extends Parser {
 
 	public final CommonRegisterContext commonRegister() throws RecognitionException {
 		CommonRegisterContext _localctx = new CommonRegisterContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_commonRegister);
+		enterRule(_localctx, 18, RULE_commonRegister);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(71);
+			setState(80);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AX) | (1L << AL) | (1L << AH) | (1L << BX) | (1L << BH) | (1L << BL) | (1L << CX) | (1L << CH) | (1L << CL) | (1L << DX) | (1L << DH) | (1L << DL))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -694,12 +844,12 @@ public class AssemblerParser extends Parser {
 
 	public final CodeRegisterContext codeRegister() throws RecognitionException {
 		CodeRegisterContext _localctx = new CodeRegisterContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_codeRegister);
+		enterRule(_localctx, 20, RULE_codeRegister);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(73);
+			setState(82);
 			_la = _input.LA(1);
 			if ( !(_la==CS || _la==CP) ) {
 			_errHandler.recoverInline(this);
@@ -746,12 +896,12 @@ public class AssemblerParser extends Parser {
 
 	public final StackRegisterContext stackRegister() throws RecognitionException {
 		StackRegisterContext _localctx = new StackRegisterContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_stackRegister);
+		enterRule(_localctx, 22, RULE_stackRegister);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(75);
+			setState(84);
 			_la = _input.LA(1);
 			if ( !(_la==SS || _la==SP) ) {
 			_errHandler.recoverInline(this);
@@ -776,7 +926,7 @@ public class AssemblerParser extends Parser {
 
 	public static class DataRegisterContext extends ParserRuleContext {
 		public TerminalNode DS() { return getToken(AssemblerParser.DS, 0); }
-		public TerminalNode DX() { return getToken(AssemblerParser.DX, 0); }
+		public TerminalNode DP() { return getToken(AssemblerParser.DP, 0); }
 		public DataRegisterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -798,14 +948,14 @@ public class AssemblerParser extends Parser {
 
 	public final DataRegisterContext dataRegister() throws RecognitionException {
 		DataRegisterContext _localctx = new DataRegisterContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_dataRegister);
+		enterRule(_localctx, 24, RULE_dataRegister);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(77);
+			setState(86);
 			_la = _input.LA(1);
-			if ( !(_la==DS || _la==DX) ) {
+			if ( !(_la==DS || _la==DP) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -827,26 +977,28 @@ public class AssemblerParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\33R\4\2\t\2\4\3\t"+
-		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
-		"\f\t\f\3\2\6\2\32\n\2\r\2\16\2\33\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\5\3*\n\3\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\5\5\64\n\5\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6@\n\6\3\7\3\7\3\b\3\b\3\b\3\b\5"+
-		"\bH\n\b\3\t\3\t\3\n\3\n\3\13\3\13\3\f\3\f\3\f\2\2\r\2\4\6\b\n\f\16\20"+
-		"\22\24\26\2\6\4\2\5\r\17\21\3\2\22\23\3\2\24\25\3\2\16\17\2O\2\31\3\2"+
-		"\2\2\4)\3\2\2\2\6+\3\2\2\2\b\63\3\2\2\2\n?\3\2\2\2\fA\3\2\2\2\16G\3\2"+
-		"\2\2\20I\3\2\2\2\22K\3\2\2\2\24M\3\2\2\2\26O\3\2\2\2\30\32\5\4\3\2\31"+
-		"\30\3\2\2\2\32\33\3\2\2\2\33\31\3\2\2\2\33\34\3\2\2\2\34\3\3\2\2\2\35"+
-		"\36\5\6\4\2\36\37\7\32\2\2\37*\3\2\2\2 !\5\b\5\2!\"\7\32\2\2\"*\3\2\2"+
-		"\2#$\5\n\6\2$%\7\32\2\2%*\3\2\2\2&\'\5\f\7\2\'(\7\32\2\2(*\3\2\2\2)\35"+
-		"\3\2\2\2) \3\2\2\2)#\3\2\2\2)&\3\2\2\2*\5\3\2\2\2+,\7\26\2\2,-\7\3\2\2"+
-		"-.\7\32\2\2.\7\3\2\2\2/\60\7\26\2\2\60\64\7\27\2\2\61\62\7\26\2\2\62\64"+
-		"\5\16\b\2\63/\3\2\2\2\63\61\3\2\2\2\64\t\3\2\2\2\65\66\7\26\2\2\66\67"+
-		"\5\16\b\2\678\7\4\2\289\5\16\b\29@\3\2\2\2:;\7\26\2\2;<\5\16\b\2<=\7\4"+
-		"\2\2=>\7\27\2\2>@\3\2\2\2?\65\3\2\2\2?:\3\2\2\2@\13\3\2\2\2AB\7\26\2\2"+
-		"B\r\3\2\2\2CH\5\20\t\2DH\5\22\n\2EH\5\24\13\2FH\5\26\f\2GC\3\2\2\2GD\3"+
-		"\2\2\2GE\3\2\2\2GF\3\2\2\2H\17\3\2\2\2IJ\t\2\2\2J\21\3\2\2\2KL\t\3\2\2"+
-		"L\23\3\2\2\2MN\t\4\2\2N\25\3\2\2\2OP\t\5\2\2P\27\3\2\2\2\7\33)\63?G";
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&[\4\2\t\2\4\3\t\3"+
+		"\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f"+
+		"\t\f\4\r\t\r\4\16\t\16\3\2\6\2\36\n\2\r\2\16\2\37\3\3\3\3\3\3\3\3\3\3"+
+		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3.\n\3\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5"+
+		"\3\5\5\59\n\5\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7G\n\7"+
+		"\3\b\3\b\3\t\3\t\3\n\3\n\3\n\3\n\5\nQ\n\n\3\13\3\13\3\f\3\f\3\r\3\r\3"+
+		"\16\3\16\3\16\2\2\17\2\4\6\b\n\f\16\20\22\24\26\30\32\2\t\3\2\34\35\3"+
+		"\2\36\"\3\2#%\3\2\5\20\3\2\21\22\3\2\23\24\3\2\25\26\2V\2\35\3\2\2\2\4"+
+		"-\3\2\2\2\6/\3\2\2\2\b8\3\2\2\2\n:\3\2\2\2\fF\3\2\2\2\16H\3\2\2\2\20J"+
+		"\3\2\2\2\22P\3\2\2\2\24R\3\2\2\2\26T\3\2\2\2\30V\3\2\2\2\32X\3\2\2\2\34"+
+		"\36\5\4\3\2\35\34\3\2\2\2\36\37\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \3\3"+
+		"\2\2\2!\"\5\b\5\2\"#\7\32\2\2#.\3\2\2\2$%\5\f\7\2%&\7\32\2\2&.\3\2\2\2"+
+		"\'(\5\20\t\2()\7\32\2\2).\3\2\2\2*+\5\6\4\2+,\7\32\2\2,.\3\2\2\2-!\3\2"+
+		"\2\2-$\3\2\2\2-\'\3\2\2\2-*\3\2\2\2.\5\3\2\2\2/\60\7&\2\2\60\61\7\3\2"+
+		"\2\61\7\3\2\2\2\62\63\5\n\6\2\63\64\7\27\2\2\649\3\2\2\2\65\66\5\n\6\2"+
+		"\66\67\5\22\n\2\679\3\2\2\28\62\3\2\2\28\65\3\2\2\29\t\3\2\2\2:;\t\2\2"+
+		"\2;\13\3\2\2\2<=\5\16\b\2=>\5\22\n\2>?\7\4\2\2?@\5\22\n\2@G\3\2\2\2AB"+
+		"\5\16\b\2BC\5\22\n\2CD\7\4\2\2DE\7\27\2\2EG\3\2\2\2F<\3\2\2\2FA\3\2\2"+
+		"\2G\r\3\2\2\2HI\t\3\2\2I\17\3\2\2\2JK\t\4\2\2K\21\3\2\2\2LQ\5\24\13\2"+
+		"MQ\5\26\f\2NQ\5\30\r\2OQ\5\32\16\2PL\3\2\2\2PM\3\2\2\2PN\3\2\2\2PO\3\2"+
+		"\2\2Q\23\3\2\2\2RS\t\5\2\2S\25\3\2\2\2TU\t\6\2\2U\27\3\2\2\2VW\t\7\2\2"+
+		"W\31\3\2\2\2XY\t\b\2\2Y\33\3\2\2\2\7\37-8FP";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

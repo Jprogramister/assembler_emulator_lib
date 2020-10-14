@@ -1,6 +1,8 @@
-// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/calculator/Assembler.g4 by ANTLR 4.8
-package calculator;
+// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/grammar/Assembler.g4 by ANTLR 4.8
+package antlr;
 
+import grammar.AssemblerListener;
+import grammar.AssemblerParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -52,25 +54,37 @@ public class AssemblerBaseListener implements AssemblerListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnaryExprConst(AssemblerParser.UnaryExprConstContext ctx) { }
+	@Override public void enterUnaryOperationConst(AssemblerParser.UnaryOperationConstContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnaryExprConst(AssemblerParser.UnaryExprConstContext ctx) { }
+	@Override public void exitUnaryOperationConst(AssemblerParser.UnaryOperationConstContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnaryExprRegister(AssemblerParser.UnaryExprRegisterContext ctx) { }
+	@Override public void enterUnaryOperationRegister(AssemblerParser.UnaryOperationRegisterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnaryExprRegister(AssemblerParser.UnaryExprRegisterContext ctx) { }
+	@Override public void exitUnaryOperationRegister(AssemblerParser.UnaryOperationRegisterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnaryOperator(AssemblerParser.UnaryOperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnaryOperator(AssemblerParser.UnaryOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -95,6 +109,18 @@ public class AssemblerBaseListener implements AssemblerListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBinaryExprRegisterConst(AssemblerParser.BinaryExprRegisterConstContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBinaryOperator(AssemblerParser.BinaryOperatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinaryOperator(AssemblerParser.BinaryOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

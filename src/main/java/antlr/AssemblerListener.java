@@ -1,5 +1,6 @@
-// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/calculator/Assembler.g4 by ANTLR 4.8
-package calculator;
+// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/grammar/Assembler.g4 by ANTLR 4.8
+package antlr;
+import grammar.AssemblerParser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -38,53 +39,73 @@ public interface AssemblerListener extends ParseTreeListener {
 	 */
 	void exitLabelDef(AssemblerParser.LabelDefContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code unaryExprConst}
-	 * labeled alternative in {@link AssemblerParser#unaryExpr}.
+	 * Enter a parse tree produced by the {@code unaryOperationConst}
+	 * labeled alternative in {@link AssemblerParser#unaryOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnaryExprConst(AssemblerParser.UnaryExprConstContext ctx);
+	void enterUnaryOperationConst(AssemblerParser.UnaryOperationConstContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code unaryExprConst}
-	 * labeled alternative in {@link AssemblerParser#unaryExpr}.
+	 * Exit a parse tree produced by the {@code unaryOperationConst}
+	 * labeled alternative in {@link AssemblerParser#unaryOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnaryExprConst(AssemblerParser.UnaryExprConstContext ctx);
+	void exitUnaryOperationConst(AssemblerParser.UnaryOperationConstContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code unaryExprRegister}
-	 * labeled alternative in {@link AssemblerParser#unaryExpr}.
+	 * Enter a parse tree produced by the {@code unaryOperationRegister}
+	 * labeled alternative in {@link AssemblerParser#unaryOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnaryExprRegister(AssemblerParser.UnaryExprRegisterContext ctx);
+	void enterUnaryOperationRegister(AssemblerParser.UnaryOperationRegisterContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code unaryExprRegister}
-	 * labeled alternative in {@link AssemblerParser#unaryExpr}.
+	 * Exit a parse tree produced by the {@code unaryOperationRegister}
+	 * labeled alternative in {@link AssemblerParser#unaryOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnaryExprRegister(AssemblerParser.UnaryExprRegisterContext ctx);
+	void exitUnaryOperationRegister(AssemblerParser.UnaryOperationRegisterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AssemblerParser#unaryOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryOperator(AssemblerParser.UnaryOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AssemblerParser#unaryOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryOperator(AssemblerParser.UnaryOperatorContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code binaryExprRegisters}
-	 * labeled alternative in {@link AssemblerParser#binaryExpr}.
+	 * labeled alternative in {@link AssemblerParser#binaryOperation}.
 	 * @param ctx the parse tree
 	 */
 	void enterBinaryExprRegisters(AssemblerParser.BinaryExprRegistersContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code binaryExprRegisters}
-	 * labeled alternative in {@link AssemblerParser#binaryExpr}.
+	 * labeled alternative in {@link AssemblerParser#binaryOperation}.
 	 * @param ctx the parse tree
 	 */
 	void exitBinaryExprRegisters(AssemblerParser.BinaryExprRegistersContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code binaryExprRegisterConst}
-	 * labeled alternative in {@link AssemblerParser#binaryExpr}.
+	 * labeled alternative in {@link AssemblerParser#binaryOperation}.
 	 * @param ctx the parse tree
 	 */
 	void enterBinaryExprRegisterConst(AssemblerParser.BinaryExprRegisterConstContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code binaryExprRegisterConst}
-	 * labeled alternative in {@link AssemblerParser#binaryExpr}.
+	 * labeled alternative in {@link AssemblerParser#binaryOperation}.
 	 * @param ctx the parse tree
 	 */
 	void exitBinaryExprRegisterConst(AssemblerParser.BinaryExprRegisterConstContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link AssemblerParser#binaryOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinaryOperator(AssemblerParser.BinaryOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link AssemblerParser#binaryOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinaryOperator(AssemblerParser.BinaryOperatorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link AssemblerParser#instruction}.
 	 * @param ctx the parse tree

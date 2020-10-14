@@ -1,5 +1,5 @@
-// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/calculator/Assembler.g4 by ANTLR 4.8
-package calculator;
+// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/grammar/Assembler.g4 by ANTLR 4.8
+package antlr;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -29,33 +29,45 @@ public interface AssemblerVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLabelDef(AssemblerParser.LabelDefContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code unaryExprConst}
-	 * labeled alternative in {@link AssemblerParser#unaryExpr}.
+	 * Visit a parse tree produced by the {@code unaryOperationConst}
+	 * labeled alternative in {@link AssemblerParser#unaryOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnaryExprConst(AssemblerParser.UnaryExprConstContext ctx);
+	T visitUnaryOperationConst(AssemblerParser.UnaryOperationConstContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code unaryExprRegister}
-	 * labeled alternative in {@link AssemblerParser#unaryExpr}.
+	 * Visit a parse tree produced by the {@code unaryOperationRegister}
+	 * labeled alternative in {@link AssemblerParser#unaryOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnaryExprRegister(AssemblerParser.UnaryExprRegisterContext ctx);
+	T visitUnaryOperationRegister(AssemblerParser.UnaryOperationRegisterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#unaryOperator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryOperator(AssemblerParser.UnaryOperatorContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code binaryExprRegisters}
-	 * labeled alternative in {@link AssemblerParser#binaryExpr}.
+	 * labeled alternative in {@link AssemblerParser#binaryOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBinaryExprRegisters(AssemblerParser.BinaryExprRegistersContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code binaryExprRegisterConst}
-	 * labeled alternative in {@link AssemblerParser#binaryExpr}.
+	 * labeled alternative in {@link AssemblerParser#binaryOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitBinaryExprRegisterConst(AssemblerParser.BinaryExprRegisterConstContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link AssemblerParser#binaryOperator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinaryOperator(AssemblerParser.BinaryOperatorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link AssemblerParser#instruction}.
 	 * @param ctx the parse tree
