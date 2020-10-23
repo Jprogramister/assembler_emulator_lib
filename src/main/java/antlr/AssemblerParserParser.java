@@ -1,34 +1,36 @@
-// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/grammar/Assembler.g4 by ANTLR 4.8
+// Generated from /home/dmitry/IdeaProjects/Antlr4_Assembler/src/main/java/grammar/AssemblerParser.g4 by ANTLR 4.8
 package antlr;
-import grammar.AssemblerVisitor;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
+import java.util.Iterator;
+import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class AssemblerParser extends Parser {
+public class AssemblerParserParser extends Parser {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, T__1=2, AX=3, AL=4, AH=5, BX=6, BH=7, BL=8, CX=9, CH=10, CL=11, 
-		DX=12, DH=13, DL=14, CS=15, CP=16, SS=17, SP=18, DS=19, DP=20, NUMBER=21, 
+		T__0=1, T__1=2, CS=3, CP=4, SS=5, SP=6, DS=7, DP=8, AX=9, AL=10, AH=11, 
+		BX=12, BH=13, BL=14, CX=15, CH=16, CL=17, DX=18, DH=19, DL=20, NUMBER=21, 
 		HEX_NUMBER=22, INT=23, NEWLINE=24, WS=25, PUSH=26, POP=27, MOV=28, ADD=29, 
 		SUB=30, DIV=31, MUL=32, CALL=33, RET=34, JMP=35, ID=36;
 	public static final int
 		RULE_programm = 0, RULE_stat = 1, RULE_labelDef = 2, RULE_unaryOperation = 3, 
 		RULE_unaryOperator = 4, RULE_binaryOperation = 5, RULE_binaryOperator = 6, 
-		RULE_instruction = 7, RULE_register = 8, RULE_commonRegister = 9, RULE_codeRegister = 10, 
-		RULE_stackRegister = 11, RULE_dataRegister = 12;
+		RULE_instruction = 7, RULE_register = 8, RULE_codeRegister = 9, RULE_stackRegister = 10, 
+		RULE_dataRegister = 11, RULE_commonRegister = 12;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"programm", "stat", "labelDef", "unaryOperation", "unaryOperator", "binaryOperation", 
-			"binaryOperator", "instruction", "register", "commonRegister", "codeRegister", 
-			"stackRegister", "dataRegister"
+			"binaryOperator", "instruction", "register", "codeRegister", "stackRegister", 
+			"dataRegister", "commonRegister"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -41,8 +43,8 @@ public class AssemblerParser extends Parser {
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, null, "AX", "AL", "AH", "BX", "BH", "BL", "CX", "CH", "CL", 
-			"DX", "DH", "DL", "CS", "CP", "SS", "SP", "DS", "DP", "NUMBER", "HEX_NUMBER", 
+			null, null, null, "CS", "CP", "SS", "SP", "DS", "DP", "AX", "AL", "AH", 
+			"BX", "BH", "BL", "CX", "CH", "CL", "DX", "DH", "DL", "NUMBER", "HEX_NUMBER", 
 			"INT", "NEWLINE", "WS", "PUSH", "POP", "MOV", "ADD", "SUB", "DIV", "MUL", 
 			"CALL", "RET", "JMP", "ID"
 		};
@@ -82,7 +84,7 @@ public class AssemblerParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Assembler.g4"; }
+	public String getGrammarFileName() { return "AssemblerParser.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -93,7 +95,7 @@ public class AssemblerParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public AssemblerParser(TokenStream input) {
+	public AssemblerParserParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -111,15 +113,15 @@ public class AssemblerParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_programm; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterProgramm(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterProgramm(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitProgramm(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitProgramm(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor) return ((AssemblerVisitor<? extends T>)visitor).visitProgramm(this);
+			if ( visitor instanceof AssemblerParserVisitor) return ((AssemblerParserVisitor<? extends T>)visitor).visitProgramm(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -162,7 +164,7 @@ public class AssemblerParser extends Parser {
 		public UnaryOperationContext unaryOperation() {
 			return getRuleContext(UnaryOperationContext.class,0);
 		}
-		public TerminalNode NEWLINE() { return getToken(AssemblerParser.NEWLINE, 0); }
+		public TerminalNode NEWLINE() { return getToken(AssemblerParserParser.NEWLINE, 0); }
 		public BinaryOperationContext binaryOperation() {
 			return getRuleContext(BinaryOperationContext.class,0);
 		}
@@ -178,15 +180,15 @@ public class AssemblerParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_stat; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterStat(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterStat(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitStat(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitStat(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitStat(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitStat(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -257,22 +259,22 @@ public class AssemblerParser extends Parser {
 	}
 
 	public static class LabelDefContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(AssemblerParser.ID, 0); }
+		public TerminalNode ID() { return getToken(AssemblerParserParser.ID, 0); }
 		public LabelDefContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_labelDef; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterLabelDef(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterLabelDef(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitLabelDef(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitLabelDef(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitLabelDef(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitLabelDef(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -321,15 +323,15 @@ public class AssemblerParser extends Parser {
 		public UnaryOperationRegisterContext(UnaryOperationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterUnaryOperationRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterUnaryOperationRegister(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitUnaryOperationRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitUnaryOperationRegister(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitUnaryOperationRegister(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitUnaryOperationRegister(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -337,19 +339,19 @@ public class AssemblerParser extends Parser {
 		public UnaryOperatorContext unaryOperator() {
 			return getRuleContext(UnaryOperatorContext.class,0);
 		}
-		public TerminalNode NUMBER() { return getToken(AssemblerParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(AssemblerParserParser.NUMBER, 0); }
 		public UnaryOperationConstContext(UnaryOperationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterUnaryOperationConst(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterUnaryOperationConst(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitUnaryOperationConst(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitUnaryOperationConst(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitUnaryOperationConst(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitUnaryOperationConst(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -395,23 +397,23 @@ public class AssemblerParser extends Parser {
 	}
 
 	public static class UnaryOperatorContext extends ParserRuleContext {
-		public TerminalNode PUSH() { return getToken(AssemblerParser.PUSH, 0); }
-		public TerminalNode POP() { return getToken(AssemblerParser.POP, 0); }
+		public TerminalNode PUSH() { return getToken(AssemblerParserParser.PUSH, 0); }
+		public TerminalNode POP() { return getToken(AssemblerParserParser.POP, 0); }
 		public UnaryOperatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_unaryOperator; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterUnaryOperator(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterUnaryOperator(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitUnaryOperator(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitUnaryOperator(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitUnaryOperator(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitUnaryOperator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -464,19 +466,19 @@ public class AssemblerParser extends Parser {
 		public RegisterContext register() {
 			return getRuleContext(RegisterContext.class,0);
 		}
-		public TerminalNode NUMBER() { return getToken(AssemblerParser.NUMBER, 0); }
+		public TerminalNode NUMBER() { return getToken(AssemblerParserParser.NUMBER, 0); }
 		public BinaryExprRegisterConstContext(BinaryOperationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterBinaryExprRegisterConst(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterBinaryExprRegisterConst(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitBinaryExprRegisterConst(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitBinaryExprRegisterConst(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitBinaryExprRegisterConst(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitBinaryExprRegisterConst(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -493,15 +495,15 @@ public class AssemblerParser extends Parser {
 		public BinaryExprRegistersContext(BinaryOperationContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterBinaryExprRegisters(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterBinaryExprRegisters(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitBinaryExprRegisters(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitBinaryExprRegisters(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitBinaryExprRegisters(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitBinaryExprRegisters(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -555,26 +557,26 @@ public class AssemblerParser extends Parser {
 	}
 
 	public static class BinaryOperatorContext extends ParserRuleContext {
-		public TerminalNode MOV() { return getToken(AssemblerParser.MOV, 0); }
-		public TerminalNode ADD() { return getToken(AssemblerParser.ADD, 0); }
-		public TerminalNode SUB() { return getToken(AssemblerParser.SUB, 0); }
-		public TerminalNode DIV() { return getToken(AssemblerParser.DIV, 0); }
-		public TerminalNode MUL() { return getToken(AssemblerParser.MUL, 0); }
+		public TerminalNode MOV() { return getToken(AssemblerParserParser.MOV, 0); }
+		public TerminalNode ADD() { return getToken(AssemblerParserParser.ADD, 0); }
+		public TerminalNode SUB() { return getToken(AssemblerParserParser.SUB, 0); }
+		public TerminalNode DIV() { return getToken(AssemblerParserParser.DIV, 0); }
+		public TerminalNode MUL() { return getToken(AssemblerParserParser.MUL, 0); }
 		public BinaryOperatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_binaryOperator; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterBinaryOperator(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterBinaryOperator(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitBinaryOperator(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitBinaryOperator(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitBinaryOperator(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitBinaryOperator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -610,24 +612,24 @@ public class AssemblerParser extends Parser {
 	}
 
 	public static class InstructionContext extends ParserRuleContext {
-		public TerminalNode CALL() { return getToken(AssemblerParser.CALL, 0); }
-		public TerminalNode RET() { return getToken(AssemblerParser.RET, 0); }
-		public TerminalNode JMP() { return getToken(AssemblerParser.JMP, 0); }
+		public TerminalNode CALL() { return getToken(AssemblerParserParser.CALL, 0); }
+		public TerminalNode RET() { return getToken(AssemblerParserParser.RET, 0); }
+		public TerminalNode JMP() { return getToken(AssemblerParserParser.JMP, 0); }
 		public InstructionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_instruction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterInstruction(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterInstruction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitInstruction(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitInstruction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitInstruction(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitInstruction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -681,15 +683,15 @@ public class AssemblerParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_register; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterRegister(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitRegister(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitRegister(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitRegister(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -758,98 +760,36 @@ public class AssemblerParser extends Parser {
 		return _localctx;
 	}
 
-	public static class CommonRegisterContext extends ParserRuleContext {
-		public TerminalNode AX() { return getToken(AssemblerParser.AX, 0); }
-		public TerminalNode AL() { return getToken(AssemblerParser.AL, 0); }
-		public TerminalNode AH() { return getToken(AssemblerParser.AH, 0); }
-		public TerminalNode BX() { return getToken(AssemblerParser.BX, 0); }
-		public TerminalNode BH() { return getToken(AssemblerParser.BH, 0); }
-		public TerminalNode BL() { return getToken(AssemblerParser.BL, 0); }
-		public TerminalNode CX() { return getToken(AssemblerParser.CX, 0); }
-		public TerminalNode CH() { return getToken(AssemblerParser.CH, 0); }
-		public TerminalNode CL() { return getToken(AssemblerParser.CL, 0); }
-		public TerminalNode DX() { return getToken(AssemblerParser.DX, 0); }
-		public TerminalNode DH() { return getToken(AssemblerParser.DH, 0); }
-		public TerminalNode DL() { return getToken(AssemblerParser.DL, 0); }
-		public CommonRegisterContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_commonRegister; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterCommonRegister(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitCommonRegister(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitCommonRegister(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final CommonRegisterContext commonRegister() throws RecognitionException {
-		CommonRegisterContext _localctx = new CommonRegisterContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_commonRegister);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(80);
-			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AX) | (1L << AL) | (1L << AH) | (1L << BX) | (1L << BH) | (1L << BL) | (1L << CX) | (1L << CH) | (1L << CL) | (1L << DX) | (1L << DH) | (1L << DL))) != 0)) ) {
-			_errHandler.recoverInline(this);
-			}
-			else {
-				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-				_errHandler.reportMatch(this);
-				consume();
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
 	public static class CodeRegisterContext extends ParserRuleContext {
-		public TerminalNode CS() { return getToken(AssemblerParser.CS, 0); }
-		public TerminalNode CP() { return getToken(AssemblerParser.CP, 0); }
+		public TerminalNode CS() { return getToken(AssemblerParserParser.CS, 0); }
+		public TerminalNode CP() { return getToken(AssemblerParserParser.CP, 0); }
 		public CodeRegisterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_codeRegister; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterCodeRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterCodeRegister(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitCodeRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitCodeRegister(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitCodeRegister(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitCodeRegister(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final CodeRegisterContext codeRegister() throws RecognitionException {
 		CodeRegisterContext _localctx = new CodeRegisterContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_codeRegister);
+		enterRule(_localctx, 18, RULE_codeRegister);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(82);
+			setState(80);
 			_la = _input.LA(1);
 			if ( !(_la==CS || _la==CP) ) {
 			_errHandler.recoverInline(this);
@@ -873,35 +813,35 @@ public class AssemblerParser extends Parser {
 	}
 
 	public static class StackRegisterContext extends ParserRuleContext {
-		public TerminalNode SS() { return getToken(AssemblerParser.SS, 0); }
-		public TerminalNode SP() { return getToken(AssemblerParser.SP, 0); }
+		public TerminalNode SS() { return getToken(AssemblerParserParser.SS, 0); }
+		public TerminalNode SP() { return getToken(AssemblerParserParser.SP, 0); }
 		public StackRegisterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_stackRegister; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterStackRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterStackRegister(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitStackRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitStackRegister(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitStackRegister(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitStackRegister(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final StackRegisterContext stackRegister() throws RecognitionException {
 		StackRegisterContext _localctx = new StackRegisterContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_stackRegister);
+		enterRule(_localctx, 20, RULE_stackRegister);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(84);
+			setState(82);
 			_la = _input.LA(1);
 			if ( !(_la==SS || _la==SP) ) {
 			_errHandler.recoverInline(this);
@@ -925,37 +865,99 @@ public class AssemblerParser extends Parser {
 	}
 
 	public static class DataRegisterContext extends ParserRuleContext {
-		public TerminalNode DS() { return getToken(AssemblerParser.DS, 0); }
-		public TerminalNode DP() { return getToken(AssemblerParser.DP, 0); }
+		public TerminalNode DS() { return getToken(AssemblerParserParser.DS, 0); }
+		public TerminalNode DP() { return getToken(AssemblerParserParser.DP, 0); }
 		public DataRegisterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_dataRegister; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).enterDataRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterDataRegister(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof AssemblerListener ) ((AssemblerListener)listener).exitDataRegister(this);
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitDataRegister(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof AssemblerVisitor ) return ((AssemblerVisitor<? extends T>)visitor).visitDataRegister(this);
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitDataRegister(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final DataRegisterContext dataRegister() throws RecognitionException {
 		DataRegisterContext _localctx = new DataRegisterContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_dataRegister);
+		enterRule(_localctx, 22, RULE_dataRegister);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(84);
+			_la = _input.LA(1);
+			if ( !(_la==DS || _la==DP) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class CommonRegisterContext extends ParserRuleContext {
+		public TerminalNode AX() { return getToken(AssemblerParserParser.AX, 0); }
+		public TerminalNode AL() { return getToken(AssemblerParserParser.AL, 0); }
+		public TerminalNode AH() { return getToken(AssemblerParserParser.AH, 0); }
+		public TerminalNode BX() { return getToken(AssemblerParserParser.BX, 0); }
+		public TerminalNode BH() { return getToken(AssemblerParserParser.BH, 0); }
+		public TerminalNode BL() { return getToken(AssemblerParserParser.BL, 0); }
+		public TerminalNode CX() { return getToken(AssemblerParserParser.CX, 0); }
+		public TerminalNode CH() { return getToken(AssemblerParserParser.CH, 0); }
+		public TerminalNode CL() { return getToken(AssemblerParserParser.CL, 0); }
+		public TerminalNode DX() { return getToken(AssemblerParserParser.DX, 0); }
+		public TerminalNode DH() { return getToken(AssemblerParserParser.DH, 0); }
+		public TerminalNode DL() { return getToken(AssemblerParserParser.DL, 0); }
+		public CommonRegisterContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_commonRegister; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).enterCommonRegister(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof AssemblerParserListener ) ((AssemblerParserListener)listener).exitCommonRegister(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof AssemblerParserVisitor ) return ((AssemblerParserVisitor<? extends T>)visitor).visitCommonRegister(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final CommonRegisterContext commonRegister() throws RecognitionException {
+		CommonRegisterContext _localctx = new CommonRegisterContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_commonRegister);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(86);
 			_la = _input.LA(1);
-			if ( !(_la==DS || _la==DP) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << AX) | (1L << AL) | (1L << AH) | (1L << BX) | (1L << BH) | (1L << BL) | (1L << CX) | (1L << CH) | (1L << CL) | (1L << DX) | (1L << DH) | (1L << DL))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -984,21 +986,21 @@ public class AssemblerParser extends Parser {
 		"\3\5\5\59\n\5\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7G\n\7"+
 		"\3\b\3\b\3\t\3\t\3\n\3\n\3\n\3\n\5\nQ\n\n\3\13\3\13\3\f\3\f\3\r\3\r\3"+
 		"\16\3\16\3\16\2\2\17\2\4\6\b\n\f\16\20\22\24\26\30\32\2\t\3\2\34\35\3"+
-		"\2\36\"\3\2#%\3\2\5\20\3\2\21\22\3\2\23\24\3\2\25\26\2V\2\35\3\2\2\2\4"+
-		"-\3\2\2\2\6/\3\2\2\2\b8\3\2\2\2\n:\3\2\2\2\fF\3\2\2\2\16H\3\2\2\2\20J"+
-		"\3\2\2\2\22P\3\2\2\2\24R\3\2\2\2\26T\3\2\2\2\30V\3\2\2\2\32X\3\2\2\2\34"+
-		"\36\5\4\3\2\35\34\3\2\2\2\36\37\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \3\3"+
-		"\2\2\2!\"\5\b\5\2\"#\7\32\2\2#.\3\2\2\2$%\5\f\7\2%&\7\32\2\2&.\3\2\2\2"+
-		"\'(\5\20\t\2()\7\32\2\2).\3\2\2\2*+\5\6\4\2+,\7\32\2\2,.\3\2\2\2-!\3\2"+
-		"\2\2-$\3\2\2\2-\'\3\2\2\2-*\3\2\2\2.\5\3\2\2\2/\60\7&\2\2\60\61\7\3\2"+
-		"\2\61\7\3\2\2\2\62\63\5\n\6\2\63\64\7\27\2\2\649\3\2\2\2\65\66\5\n\6\2"+
-		"\66\67\5\22\n\2\679\3\2\2\28\62\3\2\2\28\65\3\2\2\29\t\3\2\2\2:;\t\2\2"+
-		"\2;\13\3\2\2\2<=\5\16\b\2=>\5\22\n\2>?\7\4\2\2?@\5\22\n\2@G\3\2\2\2AB"+
-		"\5\16\b\2BC\5\22\n\2CD\7\4\2\2DE\7\27\2\2EG\3\2\2\2F<\3\2\2\2FA\3\2\2"+
-		"\2G\r\3\2\2\2HI\t\3\2\2I\17\3\2\2\2JK\t\4\2\2K\21\3\2\2\2LQ\5\24\13\2"+
-		"MQ\5\26\f\2NQ\5\30\r\2OQ\5\32\16\2PL\3\2\2\2PM\3\2\2\2PN\3\2\2\2PO\3\2"+
-		"\2\2Q\23\3\2\2\2RS\t\5\2\2S\25\3\2\2\2TU\t\6\2\2U\27\3\2\2\2VW\t\7\2\2"+
-		"W\31\3\2\2\2XY\t\b\2\2Y\33\3\2\2\2\7\37-8FP";
+		"\2\36\"\3\2#%\3\2\5\6\3\2\7\b\3\2\t\n\3\2\13\26\2V\2\35\3\2\2\2\4-\3\2"+
+		"\2\2\6/\3\2\2\2\b8\3\2\2\2\n:\3\2\2\2\fF\3\2\2\2\16H\3\2\2\2\20J\3\2\2"+
+		"\2\22P\3\2\2\2\24R\3\2\2\2\26T\3\2\2\2\30V\3\2\2\2\32X\3\2\2\2\34\36\5"+
+		"\4\3\2\35\34\3\2\2\2\36\37\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \3\3\2\2"+
+		"\2!\"\5\b\5\2\"#\7\32\2\2#.\3\2\2\2$%\5\f\7\2%&\7\32\2\2&.\3\2\2\2\'("+
+		"\5\20\t\2()\7\32\2\2).\3\2\2\2*+\5\6\4\2+,\7\32\2\2,.\3\2\2\2-!\3\2\2"+
+		"\2-$\3\2\2\2-\'\3\2\2\2-*\3\2\2\2.\5\3\2\2\2/\60\7&\2\2\60\61\7\3\2\2"+
+		"\61\7\3\2\2\2\62\63\5\n\6\2\63\64\7\27\2\2\649\3\2\2\2\65\66\5\n\6\2\66"+
+		"\67\5\22\n\2\679\3\2\2\28\62\3\2\2\28\65\3\2\2\29\t\3\2\2\2:;\t\2\2\2"+
+		";\13\3\2\2\2<=\5\16\b\2=>\5\22\n\2>?\7\4\2\2?@\5\22\n\2@G\3\2\2\2AB\5"+
+		"\16\b\2BC\5\22\n\2CD\7\4\2\2DE\7\27\2\2EG\3\2\2\2F<\3\2\2\2FA\3\2\2\2"+
+		"G\r\3\2\2\2HI\t\3\2\2I\17\3\2\2\2JK\t\4\2\2K\21\3\2\2\2LQ\5\32\16\2MQ"+
+		"\5\24\13\2NQ\5\26\f\2OQ\5\30\r\2PL\3\2\2\2PM\3\2\2\2PN\3\2\2\2PO\3\2\2"+
+		"\2Q\23\3\2\2\2RS\t\5\2\2S\25\3\2\2\2TU\t\6\2\2U\27\3\2\2\2VW\t\7\2\2W"+
+		"\31\3\2\2\2XY\t\b\2\2Y\33\3\2\2\2\7\37-8FP";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -3,6 +3,9 @@ package state.context;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Context of registers
+ */
 public final class RegistersContext {
     public RegistersContext() { }
 
@@ -11,6 +14,9 @@ public final class RegistersContext {
      */
     private static final Number DEFAULT_REGISTER_VALUE = 0;
 
+    /**
+     * Values of registers. Key is register string id
+     */
     private final Map<String, Number> registerValues = new HashMap<String, Number>();
 
     /**
@@ -25,12 +31,17 @@ public final class RegistersContext {
         return registerValues.get(reg);
     }
 
-    public void setRegisterValue(final String reg, final Number value) {
-        registerValues.put(reg, value);
+    /**
+     * Updates value of register
+     * @param registerId string id of register
+     * @param value value to update
+     */
+    public void setRegisterValue(final String registerId, final Number value) {
+        registerValues.put(registerId, value);
     }
 
     /**
-     * User-friendly representation of register values for CLI output
+     * User-friendly representation of register values for output to CLI
      * @return string with registers values
      */
     @Override
