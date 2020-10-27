@@ -21,7 +21,7 @@ public class Main {
                 var parser = new AssemblerParserParser(commonTokenStream);
 
                 ParseTree parseTree = parser.programm();
-                // System.out.println(parseTree.toStringTree());
+                System.out.println(parseTree.toStringTree());
                 var state = new State();
                 var visitor = new AssemblerVisitor();
                 var res = visitor.visit(parseTree);

@@ -1,5 +1,6 @@
 
 grammar AssemblerParser;
+
 import AssemblerLexer;
 
 programm: stat+;
@@ -27,8 +28,8 @@ unaryOperator
 
 // operations with two arguments
 binaryOperation
-    : binaryOperator register ',' register  # binaryExprRegisters
-    | binaryOperator register ',' NUMBER # binaryExprRegisterConst
+    : binaryOperator register COMMA register  # binaryExprRegisters
+    | binaryOperator register COMMA NUMBER # binaryExprRegisterConst
     ;
 
 binaryOperator

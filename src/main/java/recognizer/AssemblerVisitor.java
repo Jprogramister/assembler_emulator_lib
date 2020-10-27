@@ -20,7 +20,8 @@ public class AssemblerVisitor extends AssemblerParserBaseVisitor<Statement> {
     /**
      *  Visit of expression which uses two arguments - register and number literal
      */
-    @Override public Statement visitBinaryExprRegisterConst(AssemblerParserParser.BinaryExprRegisterConstContext ctx) {
+    @Override
+    public Statement visitBinaryExprRegisterConst(AssemblerParserParser.BinaryExprRegisterConstContext ctx) {
         String operatorId = ctx.binaryOperator().getText();
         var leftRegisterId = ctx.register().getText();
         var rightConstValue = Double.valueOf(ctx.NUMBER().getText());
