@@ -1,7 +1,7 @@
 
 
 import antlr.AssemblerLexer;
-import antlr.AssemblerParserParser;
+import antlr.AssemblerParser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -18,7 +18,7 @@ public class Main {
                 input = new ANTLRInputStream(System.in);
                 var lexer = new AssemblerLexer(input);
                 var commonTokenStream = new CommonTokenStream(lexer);
-                var parser = new AssemblerParserParser(commonTokenStream);
+                var parser = new AssemblerParser(commonTokenStream);
 
                 ParseTree parseTree = parser.programm();
                 System.out.println(parseTree.toStringTree());

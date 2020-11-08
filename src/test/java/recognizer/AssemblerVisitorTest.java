@@ -1,8 +1,9 @@
 package recognizer;
 
 import antlr.AssemblerLexer;
-import antlr.AssemblerParserParser;
-import org.antlr.v4.runtime.ANTLRInputStream;
+import antlr.AssemblerParser;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Before;
@@ -28,10 +29,9 @@ public class AssemblerVisitorTest {
      * @param fileName file name for loading
      */
     private ParseTree createParseTree(final String fileName) throws IOException {
-        var input = new ANTLRInputStream(requireNonNull(Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)));
+        CharStream input = CharStreams.fromStream(requireNonNull(Thread.currentThread().getContextClassLoader().getResourceAsStream(fileName)));
         var lexer = new AssemblerLexer(input);
-        var commonTokenStream = new CommonTokenStream(lexer);
-        var parser = new AssemblerParserParser(commonTokenStream);
+        var parser = new AssemblerParser(new CommonTokenStream(lexer));
         return parser.programm();
     }
 
