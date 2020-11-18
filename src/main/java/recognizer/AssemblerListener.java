@@ -1,31 +1,39 @@
 package recognizer;
 
 import antlr.AssemblerBaseListener;
-import recognizer.statement.BinaryStatementsFactory;
+import antlr.AssemblerParser;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import recognizer.statement.Statement;
+import java.util.List;
 
-public class AssemblerListener extends AssemblerBaseListener {
+@Slf4j
+class AssemblerListener extends AssemblerBaseListener {
+    @Getter
+    private List<Statement> statements;
+    private AssemblerVisitor assemblerVisitor;
+
+    public AssemblerListener(final AssemblerVisitor visitor) {
+        this.assemblerVisitor = visitor;
+    }
+
     /**
      * Visit of expression which uses two arguments - registers
      */
-//    @Override
-//    public void exitBinaryExprRegisters(AssemblerParserParser.BinaryExprRegistersContext ctx) {
-//        System.out.println("visit binary expresssiong");
-//        String operatorId = ctx.binaryOperator().getText();
-//        var leftRegister = ctx.register(0).getText();
-//        var rightRegister = ctx.register(1).getText();
-//        // return BinaryStatementsFactory.create(operatorId, leftRegister, rightRegister);
-//    }
-//
-//    /**
-//     *  Visit of expression which uses two arguments - register and number literal
-//     */
-//    @Override
-//    public void exitBinaryExprRegisterConst(AssemblerParserParser.BinaryExprRegisterConstContext ctx) {
-//        System.out.println("visit binary expresssiong");
-//        String operatorId = ctx.binaryOperator().getText();
-//        var leftRegisterId = ctx.register().getText();
-//        var rightConstValue = Double.valueOf(ctx.NUMBER().getText());
-//        // return BinaryStatementsFactory.create(operatorId, leftRegisterId, rightConstValue);
-//    }
+    @Override
+    public void exitBinaryExprRegisters(AssemblerParser.BinaryExprRegistersContext ctx) {
+        log.debug("listen binary expresssiong");
+        var statement = assemblerVisitor.visit(ctx);
+        // statements.add(statement);
+    }
+
+    /**
+     *  Visit of expression which uses two arguments - register and number literal
+     */
+    @Override
+    public void exitBinaryExprRegisterConst(AssemblerParser.BinaryExprRegisterConstContext ctx) {
+        log.debug("listen binary expresssiong");
+        var statement = assemblerVisitor.visit(ctx);
+        // statements.add(statement);
+    }
 }

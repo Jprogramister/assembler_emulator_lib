@@ -2,17 +2,19 @@ package recognizer;
 
 import antlr.AssemblerBaseVisitor;
 import antlr.AssemblerParser;
+import lombok.extern.slf4j.Slf4j;
 import recognizer.statement.Statement;
 import recognizer.statement.BinaryStatementsFactory;
 
-public class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
-
+@Slf4j
+class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
+    // private static Logger log = LoggerFactory.getLogger(AssemblerBaseVisitor.class);
     /**
      * Visit of expression which uses two arguments - registers
      */
     @Override
     public Statement visitBinaryExprRegisters(AssemblerParser.BinaryExprRegistersContext ctx) {
-        System.out.println("visit binary expresssiong");
+        log.debug("AssemblerVisitor visited binaryExprRegisters");
         String operatorId = ctx.binaryOperator().getText();
         var leftRegister = ctx.register(0).getText();
         var rightRegister = ctx.register(1).getText();
@@ -24,7 +26,7 @@ public class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
      */
     @Override
     public Statement visitBinaryExprRegisterConst(AssemblerParser.BinaryExprRegisterConstContext ctx) {
-        System.out.println("visit binary expresssiong");
+        System.out.println("AssemblerVisitor visited binaryExprRegisterConst");
         String operatorId = ctx.binaryOperator().getText();
         var leftRegisterId = ctx.register().getText();
         var rightConstValue = Double.valueOf(ctx.NUMBER().getText());

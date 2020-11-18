@@ -15,7 +15,7 @@ public final class RegistersContext {
     private static final Number DEFAULT_REGISTER_VALUE = 0;
 
     /**
-     * Values of registers. Key is register string id
+     * Values of registers. Key is id of register
      */
     private final Map<String, Number> registerValues = new HashMap<String, Number>();
 
