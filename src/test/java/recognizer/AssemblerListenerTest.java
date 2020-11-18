@@ -20,10 +20,12 @@ public class AssemblerListenerTest {
         assemblerListener = new AssemblerListener(assemblerVisitor);
     }
 
+    /**
+     * Check {@link AssemblerListener} don't throws exceptions while walk on parse tree
+     */
     @Test
     public void visitTest() {
         var walker = new ParseTreeWalker();
         walker.walk(assemblerListener, parseTree);
-
     }
 }

@@ -3,18 +3,33 @@ package recognizer;
 import antlr.AssemblerBaseListener;
 import antlr.AssemblerParser;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import recognizer.statement.Statement;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import emulator.statement.Statement;
+
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
+@RequiredArgsConstructor
 class AssemblerListener extends AssemblerBaseListener {
     @Getter
     private List<Statement> statements;
-    private AssemblerVisitor assemblerVisitor;
+    private final AssemblerVisitor assemblerVisitor;
 
-    public AssemblerListener(final AssemblerVisitor visitor) {
-        this.assemblerVisitor = visitor;
+    /**
+     * Walks on tree and create list of statements
+     * @param tree tree to walk
+     * @return {@link List<Statement>}
+     */
+    public static List<Statement> walk(ParseTree tree) {
+        var visitor = new AssemblerVisitor();
+        var listener = new AssemblerListener(visitor);
+        var walker = new ParseTreeWalker();
+        walker.walk(listener, tree);
+        return Collections.unmodifiableList(listener.getStatements());
     }
 
     /**
@@ -22,9 +37,9 @@ class AssemblerListener extends AssemblerBaseListener {
      */
     @Override
     public void exitBinaryExprRegisters(AssemblerParser.BinaryExprRegistersContext ctx) {
-        log.debug("listen binary expresssiong");
-        var statement = assemblerVisitor.visit(ctx);
-        // statements.add(statement);
+        log.debug("listen binary expression");
+        Statement statement = assemblerVisitor.visit(ctx);
+        statements.add(statement);
     }
 
     /**
@@ -32,8 +47,8 @@ class AssemblerListener extends AssemblerBaseListener {
      */
     @Override
     public void exitBinaryExprRegisterConst(AssemblerParser.BinaryExprRegisterConstContext ctx) {
-        log.debug("listen binary expresssiong");
-        var statement = assemblerVisitor.visit(ctx);
-        // statements.add(statement);
+        log.debug("listen binary expression");
+        Statement statement = assemblerVisitor.visit(ctx);
+        statements.add(statement);
     }
 }

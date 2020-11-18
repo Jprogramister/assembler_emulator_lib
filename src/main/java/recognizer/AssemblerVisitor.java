@@ -3,14 +3,13 @@ package recognizer;
 import antlr.AssemblerBaseVisitor;
 import antlr.AssemblerParser;
 import lombok.extern.slf4j.Slf4j;
-import recognizer.statement.Statement;
-import recognizer.statement.BinaryStatementsFactory;
+import emulator.statement.Statement;
+import emulator.statement.BinaryStatementsFactory;
 
 @Slf4j
 class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
-    // private static Logger log = LoggerFactory.getLogger(AssemblerBaseVisitor.class);
     /**
-     * Visit of expression which uses two arguments - registers
+     * Visits of expression which uses two arguments - registers
      */
     @Override
     public Statement visitBinaryExprRegisters(AssemblerParser.BinaryExprRegistersContext ctx) {
@@ -22,7 +21,7 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
     }
 
     /**
-     *  Visit of expression which uses two arguments - register and number literal
+     *  Visits of expression which uses two arguments - register and number literal
      */
     @Override
     public Statement visitBinaryExprRegisterConst(AssemblerParser.BinaryExprRegisterConstContext ctx) {

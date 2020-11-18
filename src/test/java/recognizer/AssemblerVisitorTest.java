@@ -17,6 +17,9 @@ public class AssemblerVisitorTest {
         assemblerVisitor = new AssemblerVisitor();
     }
 
+    /**
+     * Check {@link AssemblerVisitor} don't throws exception while process parsing tree
+     */
     @Test
     public void testParsingWorks() {
         assemblerVisitor.visit(parseTree);

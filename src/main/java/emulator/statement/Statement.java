@@ -1,6 +1,6 @@
-package recognizer.statement;
+package emulator.statement;
 
-import recognizer.State;
+import emulator.State;
 
 import java.util.function.Function;
 

@@ -1,6 +1,6 @@
-package recognizer.statement;
+package emulator.statement;
 
-import recognizer.operation.BinaryOperationExecutor;
+import emulator.operation.BinaryOperationExecutor;
 
 /**
  * Factory for making Statements

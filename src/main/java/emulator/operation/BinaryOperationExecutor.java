@@ -1,7 +1,7 @@
-package recognizer.operation;
+package emulator.operation;
 
-import recognizer.State;
-import state.context.RegistersContext;
+import emulator.State;
+import emulator.context.RegistersContext;
 
 import java.util.Locale;
 
@@ -36,11 +36,11 @@ public class BinaryOperationExecutor {
         var leftValue = ctx.getRegisterValue(leftRegisterId);
         switch (operator.toUpperCase(Locale.ROOT)) {
             case "ADD":
-                ctx.setRegisterValue(leftRegisterId, leftValue.doubleValue() + rightValue.doubleValue());
+                ctx.cloneAndSet(leftRegisterId, leftValue.doubleValue() + rightValue.doubleValue());
                 break;
 
             case "SUB":
-                ctx.setRegisterValue(leftRegisterId, leftValue.doubleValue() - rightValue.doubleValue());
+                ctx.cloneAndSet(leftRegisterId, leftValue.doubleValue() - rightValue.doubleValue());
                 break;
 
             default:

@@ -1,4 +1,7 @@
-package state.context;
+package emulator.context;
+
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,9 +9,8 @@ import java.util.Map;
 /**
  * Context of registers
  */
+@RequiredArgsConstructor
 public final class RegistersContext {
-    public RegistersContext() { }
-
     /**
      * This value will be returned by method getValue if required register id is not initialized
      */
@@ -36,8 +38,20 @@ public final class RegistersContext {
      * @param registerId string id of register
      * @param value value to update
      */
-    public void setRegisterValue(final String registerId, final Number value) {
+    public void setRegisterValue(String registerId, Number value) {
         registerValues.put(registerId, value);
+    }
+
+    /**
+     * Create changed copy of context
+     * @param registerId id which should be changed
+     * @param value value to set
+     * @return changed copy {@link RegistersContext}
+     */
+    public RegistersContext cloneAndSet(String registerId, Number value) {
+        Map<String, Number> valuesCopy = new HashMap<>(registerValues);
+        valuesCopy.put(registerId, value);
+        return new RegistersContext(valuesCopy);
     }
 
     /**
