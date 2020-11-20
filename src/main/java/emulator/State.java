@@ -10,7 +10,7 @@ import emulator.context.RegistersContext;
 import java.util.List;
 
 /**
- * Aggregate of CPU context states and list of code statements
+ * Aggregation of CPU context states and list of code statements
  */
 @Builder
 @Getter

@@ -6,7 +6,7 @@ import emulator.context.RegistersContext;
 import java.util.Locale;
 
 /**
- * Aggregate of functions that perform binary operators
+ * Aggregation of functions that perform binary operators
  */
 public class BinaryOperationExecutor {
     /**

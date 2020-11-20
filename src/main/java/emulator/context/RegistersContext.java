@@ -1,6 +1,7 @@
 package emulator.context;
 
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ import java.util.Map;
 /**
  * Context of registers
  */
-@RequiredArgsConstructor
+@NoArgsConstructor
 public final class RegistersContext {
     /**
      * This value will be returned by method getValue if required register id is not initialized
@@ -19,7 +20,11 @@ public final class RegistersContext {
     /**
      * Values of registers. Key is id of register
      */
-    private final Map<String, Number> registerValues = new HashMap<String, Number>();
+    private Map<String, Number> registerValues = new HashMap<String, Number>();
+
+    public RegistersContext(Map<String, Number> registerValues) {
+        this.registerValues = registerValues;
+    }
 
     /**
      * Returns register value or DEFAULT_REGISTER_VALUE if register value is not initialized yet
