@@ -1,0 +1,16 @@
+@startuml
+
+object emulator
+object state
+object callStackContext
+object codeStackContext
+object registersContext
+object statements
+
+emulator *-- state
+state *-- callStackContext
+state *-- codeStackContext
+state *-- registersContext
+state *-- statements
+
+@enduml

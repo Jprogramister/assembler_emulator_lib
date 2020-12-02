@@ -12,7 +12,7 @@ stat
 
 // definition of label for usage in jmp instruction
 labelDef: ID ':';
-
+0
 // operations with once argument
 unaryOperation
     : unaryOperator NUMBER # unaryOperationConst
@@ -26,8 +26,8 @@ unaryOperator
 
 // operations with two arguments
 binaryOperation
-    : binaryOperator register COMMA register  # binaryExprRegisters
-    | binaryOperator register COMMA NUMBER # binaryExprRegisterConst
+    : binaryOperator register COMMA register  # binaryOperationRegisters
+    | binaryOperator register COMMA NUMBER # binaryOperationRegisterConst
     ;
 
 binaryOperator
@@ -78,7 +78,6 @@ AH : A H;
 BX : B X;
 BH : B H;
 BL : B L;
-
 
 PUSH : P U S H;
 POP : P O P;

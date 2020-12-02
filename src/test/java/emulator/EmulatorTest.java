@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 public class EmulatorTest {
 
+
     @Before
     public void setUp() throws Exception {
     }

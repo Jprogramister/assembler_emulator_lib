@@ -1,0 +1,45 @@
+@startuml
+
+object programm
+object statement
+object binaryOperation
+object unaryOperation 
+
+object instruction {
+    <instruction name>
+}
+
+object labelDef {
+    <label name>
+}
+
+object unaryOperationConst {
+    <operator> <const>
+}
+
+object unaryOperationRegister {
+    <operator> <register>
+}
+
+object binaryOperationRegisters {
+    <operator> <register1>, <register2>
+}
+
+object binaryOperationRegisterConst {
+    <operator> <register>, <const>
+}
+
+programm *-- statement
+
+statement *-- binaryOperation
+statement *-- unaryOperation
+statement *-- instruction
+statement *-- labelDef
+
+unaryOperation *-- unaryOperationConst 
+unaryOperation *-- unaryOperationRegister
+
+binaryOperation *-- binaryOperationRegisters
+binaryOperation *-- binaryOperationRegisterConst
+
+@enduml
