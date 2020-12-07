@@ -1,5 +1,6 @@
 package emulator;
 
+import emulator.context.StatementsContext;
 import lombok.Builder;
 import lombok.Getter;
 import emulator.statement.Statement;
@@ -15,8 +16,17 @@ import java.util.List;
 @Builder
 @Getter
 public class State {
-    private final CallStackContext callStack = new CallStackContext();
-    private final CodeStackContext codeStack = new CodeStackContext();
-    private final RegistersContext registersContext = new RegistersContext();
-    private final List<Statement> statements;
+    private final CallStackContext callStack;
+    private final CodeStackContext codeStack;
+    private final RegistersContext registersContext;
+    private final StatementsContext statements;
+
+    public State clone(final RegistersContext ctx, final State sourceState) {
+        return State.builder()
+                .callStack(sourceState.getCallStack().clone())
+                .codeStack(sourceState.getCodeStack().clone())
+                .registersContext(ctx)
+                .statements(sourceState.getStatements().clone())
+                .build();
+    }
 }

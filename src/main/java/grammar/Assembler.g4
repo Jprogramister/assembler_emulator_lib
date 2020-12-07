@@ -12,7 +12,7 @@ stat
 
 // definition of label for usage in jmp instruction
 labelDef: ID ':';
-0
+
 // operations with once argument
 unaryOperation
     : unaryOperator NUMBER # unaryOperationConst

@@ -2,6 +2,7 @@ package emulator;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.antlr.v4.runtime.CharStream;
 import recognizer.Recognizer;
 
@@ -9,13 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Emulator {
     private final List<State> statementsCache = new ArrayList<>();
     @Getter
-    private int currentStatementIndex = 0;
+    private int currentStatementIndex;
     @Getter
     private State currentState;
+
+    public Emulator(State initialState) {
+        this.currentState = initialState;
+    }
 
     /**
      * Creates {@link Emulator} from stream
