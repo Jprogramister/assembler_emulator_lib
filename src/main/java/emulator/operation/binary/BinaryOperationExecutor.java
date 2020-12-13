@@ -35,28 +35,25 @@ public final class BinaryOperationExecutor {
     public static State perform(Operation operator, String leftRegisterId, Number rightValue, State state) {
         requireBinaryOperation(operator);
 
-        RegistersContext ctx = null;
+        RegistersContext ctx = state.getRegistersContext();
         var leftValue = ctx.getRegisterValue(leftRegisterId);
         var id = operator.getId();
 
         if (id.equals(BinaryOperation.ADD.getId())) {
-            return state.clone(
-                    ctx.cloneAndSet(leftRegisterId, leftValue.doubleValue() + rightValue.doubleValue()),
-                    state
+            return state.cloneWithRegisters(
+                    ctx.cloneAndSet(leftRegisterId, leftValue.doubleValue() + rightValue.doubleValue())
             );
         }
 
         if (id.equals(BinaryOperation.SUB.getId())) {
-            return state.clone(
-                    ctx.cloneAndSet(leftRegisterId, leftValue.doubleValue() - rightValue.doubleValue()),
-                    state
+            return state.cloneWithRegisters(
+                    ctx.cloneAndSet(leftRegisterId, leftValue.doubleValue() - rightValue.doubleValue())
             );
         }
 
         if (id.equals(BinaryOperation.MOV.getId())) {
-            return state.clone(
-                    ctx.cloneAndSet(leftRegisterId, rightValue),
-                    state
+            return state.cloneWithRegisters(
+                    ctx.cloneAndSet(leftRegisterId, rightValue)
             );
         }
 

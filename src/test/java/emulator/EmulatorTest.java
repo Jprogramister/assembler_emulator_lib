@@ -1,12 +1,10 @@
 package emulator;
 
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import recognizer.Recognizer;
 
-import static org.junit.Assert.*;
 import static recognizer.Utils.createParseTree;
 
 public class EmulatorTest {
@@ -15,7 +13,7 @@ public class EmulatorTest {
     @BeforeClass
     public static void setUp() throws Exception {
         ParseTree parseTree = createParseTree("code.asm");
-        emulator = new Emulator(Recognizer.createState(parseTree));
+        emulator = new Emulator(Recognizer.recognize(parseTree));
     }
 
     @Test

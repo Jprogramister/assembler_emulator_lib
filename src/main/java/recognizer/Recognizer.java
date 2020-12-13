@@ -1,21 +1,39 @@
 package recognizer;
 
 import emulator.State;
+import lombok.NonNull;
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.tree.ParseTree;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 /**
  * Facade of assembler code recognition
  */
-public class Recognizer {
+public final class Recognizer {
+    private Recognizer() {}
+
     /**
-     * Processes assembler code and make {@link State}
+     * Creates {@link State} by {@link String)}
+     * @param code string with assembler code
+     * @return new instance of {@link State}
+     * @throws IOException if code param is incorrect
+     */
+    public static State recognize(final String code) throws IOException {
+        var codeBytes = new ByteArrayInputStream(code.getBytes());
+        return Recognizer.recognize(CharStreams.fromStream(codeBytes));
+    }
+
+    /**
+     * Creates {@link State} by {@link CharStream}
      * @param stream stream with code text
      * @return {@link State}
      */
-    public static State recognizeCode(CharStream stream) {
+    public static State recognize(final CharStream stream) {
         ParseTree tree = Utils.createParseTree(stream);
-        return createState(tree);
+        return recognize(tree);
     }
 
     /**
@@ -23,9 +41,7 @@ public class Recognizer {
      * @param tree parse tree from {@link Utils#createParseTree(String)}
      * @return {@link State}
      */
-    public static State createState(ParseTree tree) {
-        return State.builder()
-                .statements(AssemblerListener.walk(tree))
-                .build();
+    public static State recognize(ParseTree tree) {
+        return new State(tree);
     }
 }

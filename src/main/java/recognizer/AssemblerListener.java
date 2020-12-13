@@ -2,33 +2,30 @@ package recognizer;
 
 import antlr.AssemblerBaseListener;
 import antlr.AssemblerParser;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import emulator.statement.Statement;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Slf4j
-@RequiredArgsConstructor
-class AssemblerListener extends AssemblerBaseListener {
+@NoArgsConstructor
+public class AssemblerListener extends AssemblerBaseListener {
     @Getter
-    private List<Statement> statements;
-    private final AssemblerVisitor assemblerVisitor;
+    private List<Statement> statements = new ArrayList<Statement>();
+    private final AssemblerVisitor assemblerVisitor = new AssemblerVisitor();
 
-    /**
-     * Walks on tree and create list of statements
-     * @param tree tree to walk
-     * @return {@link List<Statement>}
-     */
-    public static List<Statement> walk(ParseTree tree) {
-        var listener = new AssemblerListener(new AssemblerVisitor());
-        var walker = new ParseTreeWalker();
-        walker.walk(listener, tree);
-        return Collections.unmodifiableList(listener.getStatements());
+    public static List<Statement> generateStatements(ParseTree tree) {
+        var listener = new AssemblerListener();
+        new ParseTreeWalker().walk(listener, tree);
+        return listener.getStatements();
     }
 
     @Override

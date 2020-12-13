@@ -34,9 +34,6 @@ public final class BinaryStatementsFactory {
      * @return new {@link Statement} instance
      */
     public static Statement create(StatementType type, Function<State, State> action) {
-        return Statement.builder()
-                .action(action)
-                .type(type)
-                .build();
+        return new Statement(type, action);
     }
 }

@@ -17,7 +17,7 @@ public class AssemblerListenerTest {
     public void setUp() throws IOException {
         parseTree = createParseTree("code.asm");
         var assemblerVisitor = new AssemblerVisitor();
-        assemblerListener = new AssemblerListener(assemblerVisitor);
+        assemblerListener = new AssemblerListener();
     }
 
     /**

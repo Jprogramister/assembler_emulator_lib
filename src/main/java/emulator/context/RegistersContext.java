@@ -10,7 +10,6 @@ import java.util.Map;
 /**
  * Context of registers
  */
-@NoArgsConstructor
 public final class RegistersContext {
     /**
      * This value will be returned by method getValue if required register id is not initialized
@@ -24,6 +23,10 @@ public final class RegistersContext {
 
     public RegistersContext(Map<String, Number> registerValues) {
         this.registerValues = registerValues;
+    }
+
+    public RegistersContext() {
+
     }
 
     /**

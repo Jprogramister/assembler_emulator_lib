@@ -1,6 +1,5 @@
 package emulator;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.antlr.v4.runtime.CharStream;
@@ -28,7 +27,7 @@ public class Emulator {
      * @return new statement of {@link Emulator}
      */
     public static Emulator newFromCharStream(CharStream stream) {
-        return new Emulator(Recognizer.recognizeCode(stream));
+        return new Emulator(Recognizer.recognize(stream));
     }
 
     /**
