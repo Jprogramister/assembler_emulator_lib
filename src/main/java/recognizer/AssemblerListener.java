@@ -2,24 +2,25 @@ package recognizer;
 
 import antlr.AssemblerBaseListener;
 import antlr.AssemblerParser;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import emulator.State;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import emulator.statement.Statement;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @NoArgsConstructor
 public class AssemblerListener extends AssemblerBaseListener {
     @Getter
     private List<Statement> statements = new ArrayList<Statement>();
+    @Getter
+    private Map<String, Long> labelLine = new HashMap<>();
     private final AssemblerVisitor assemblerVisitor = new AssemblerVisitor();
 
     public static List<Statement> generateStatements(ParseTree tree) {
@@ -29,7 +30,11 @@ public class AssemblerListener extends AssemblerBaseListener {
     }
 
     @Override
-    public void exitLabelDef(AssemblerParser.LabelDefContext ctx) { }
+    public void exitLabelDef(AssemblerParser.LabelDefContext ctx) {
+        long lineNumber = ctx.getStart().getLine();
+        String labelId = ctx.ID().getText();
+        labelLine.put(labelId, lineNumber);
+    }
 
     @Override
     public void exitUnaryOperationConst(AssemblerParser.UnaryOperationConstContext ctx) { }
@@ -42,21 +47,20 @@ public class AssemblerListener extends AssemblerBaseListener {
 
     @Override
     public void exitBinaryOperationRegisters(AssemblerParser.BinaryOperationRegistersContext ctx) {
-        log.debug("listen binary expression");
-        Statement statement = assemblerVisitor.visit(ctx);
-        statements.add(statement);
+        add(assemblerVisitor.visit(ctx));
     }
 
     @Override
     public void exitBinaryOperationRegisterConst(AssemblerParser.BinaryOperationRegisterConstContext ctx) {
-        log.debug("listen binary expression");
-        Statement statement = assemblerVisitor.visit(ctx);
-        statements.add(statement);
+        add(assemblerVisitor.visit(ctx));
     }
 
     @Override
-    public void exitBinaryOperator(AssemblerParser.BinaryOperatorContext ctx) { }
+    public void enterUnaryOperationLabelJump(AssemblerParser.UnaryOperationLabelJumpContext ctx) {
+        add(assemblerVisitor.visit(ctx));
+    }
 
-    @Override
-    public void exitInstruction(AssemblerParser.InstructionContext ctx) { }
+    private void add(@NonNull Statement s) {
+        statements.add(s);
+    }
 }

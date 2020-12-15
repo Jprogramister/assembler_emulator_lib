@@ -13,27 +13,19 @@ import java.util.function.Function;
 public final class BinaryStatementsFactory {
     private BinaryStatementsFactory() { }
 
-    public static Statement create(Operation operator, String leftRegisterId, String rightRegisterId) {
-       return create(
+    public static Statement create(long lineNumber, Operation operator, String leftRegisterId, String rightRegisterId) {
+       return new Statement(
+               lineNumber,
                StatementType.BINARY_OPERATION_REGISTERS,
                state -> BinaryOperationExecutor.perform(operator, leftRegisterId, rightRegisterId, state)
        );
     }
 
-    public static Statement create(Operation operator, String leftRegisterId, Number rightValue) {
-        return create(
+    public static Statement create(long lineNumber, Operation operator, String leftRegisterId, Number rightValue) {
+        return new Statement(
+                lineNumber,
                 StatementType.BINARY_OPERATION_REGISTER_CONST,
                 state -> BinaryOperationExecutor.perform(operator, leftRegisterId, rightValue, state)
         );
-    }
-
-    /**
-     * Creates {@link Statement} by statement type and action
-     * @param type statement type
-     * @param action actions of statement
-     * @return new {@link Statement} instance
-     */
-    public static Statement create(StatementType type, Function<State, State> action) {
-        return new Statement(type, action);
     }
 }

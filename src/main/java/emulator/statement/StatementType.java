@@ -4,7 +4,7 @@ public enum StatementType {
     /**
      * Instruction for CPU
      */
-    INSTRUCTION,
+    JMP,
 
     /**
      * Binary operation of type operation register1, register2

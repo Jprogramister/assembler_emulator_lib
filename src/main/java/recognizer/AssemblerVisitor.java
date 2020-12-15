@@ -2,20 +2,26 @@ package recognizer;
 
 import antlr.AssemblerBaseVisitor;
 import antlr.AssemblerParser;
+import emulator.State;
 import emulator.operation.Operation;
 import emulator.operation.OperationParsingError;
+import emulator.operation.instruction.InstructionStatementFactory;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import emulator.statement.Statement;
 import emulator.operation.binary.BinaryStatementsFactory;
 
+import java.util.Map;
+import java.util.Optional;
+
 @Slf4j
 class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
+    @Getter
+    private Map<String, Long> labelLine;
 
     @Override
     public Statement visitProgramm(AssemblerParser.ProgrammContext ctx) { return visitChildren(ctx); }
-
-    @Override
-    public Statement visitStat(AssemblerParser.StatContext ctx) { return visitChildren(ctx); }
 
     @Override
     public Statement visitLabelDef(AssemblerParser.LabelDefContext ctx) { return visitChildren(ctx); }
@@ -39,7 +45,11 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
             String operatorId = ctx.binaryOperator().getText();
             var leftRegister = ctx.register(0).getText();
             var rightRegister = ctx.register(1).getText();
-            return BinaryStatementsFactory.create(Operation.parse(operatorId), leftRegister, rightRegister);
+            return BinaryStatementsFactory.create(
+                    ctx.getStart().getLine(),
+                    Operation.parse(operatorId),
+                    leftRegister, rightRegister
+            );
         }
         catch (OperationParsingError ex) {
             log.error("Binary operation parsing error", ex);
@@ -53,11 +63,15 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
     @Override
     public Statement visitBinaryOperationRegisterConst(AssemblerParser.BinaryOperationRegisterConstContext ctx) {
         try {
-            System.out.println("AssemblerVisitor visited binaryExprRegisterConst");
+            log.debug("AssemblerVisitor visited binaryExprRegisterConst");
             String operatorId = ctx.binaryOperator().getText();
             var leftRegisterId = ctx.register().getText();
             var rightConstValue = Double.valueOf(ctx.NUMBER().getText());
-            return BinaryStatementsFactory.create(Operation.parse(operatorId), leftRegisterId, rightConstValue);
+            return BinaryStatementsFactory.create(
+                    ctx.getStart().getLine(),
+                    Operation.parse(operatorId),
+                    leftRegisterId, rightConstValue
+            );
         }
         catch (OperationParsingError ex) {
             log.error("Binary operation parsing error ", ex);
@@ -65,9 +79,28 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
         }
     }
 
-    /**
-     * Visit instruction (statement without any arguments)
-     */
     @Override
-    public Statement visitInstruction(AssemblerParser.InstructionContext ctx) { return visitChildren(ctx); }
+    public Statement visitUnaryOperationLabelJump(AssemblerParser.UnaryOperationLabelJumpContext ctx) {
+        try {
+            log.debug("AssemblerVisitor visited unaryOperationLabelJump");
+            String labelId = ctx.ID().getText();
+            Optional<Long> lineToJump = getLabelReferencedLine(labelId);
+            if (lineToJump.isEmpty()) {
+                return null;
+            }
+            return InstructionStatementFactory.createJmpStatement(
+                    ctx.getStart().getLine(),
+                    labelId,
+                    lineToJump.get()
+            );
+        }
+        catch (OperationParsingError ex) {
+            log.error("Visit unary operation label jump error", ex);
+            return null;
+        }
+    }
+
+    private Optional<Long> getLabelReferencedLine(String labelId) throws OperationParsingError {
+        return Optional.of(labelLine.get(labelId));
+    }
 }

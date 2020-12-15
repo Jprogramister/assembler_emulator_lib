@@ -1,22 +1,30 @@
 
 grammar Assembler;
 
-programm: stat+;
+programm: command+;
 
-stat
-    : unaryOperation NEWLINE
-    | binaryOperation NEWLINE
-    | instruction NEWLINE
-    | labelDef NEWLINE
+command
+    : unaryOperation DELIM
+    | binaryOperation DELIM
+    | labelDef DELIM
+    | instruction DELIM
     ;
 
 // definition of label for usage in jmp instruction
 labelDef: ID ':';
 
+//
+instruction
+    : RET # procedureReturn
+    | STI # resetInterruptionFlag
+    ;
+
 // operations with once argument
 unaryOperation
     : unaryOperator NUMBER # unaryOperationConst
     | unaryOperator register # unaryOperationRegister
+    | CALL ID # unaryOperationProcedureCall
+    | JMP ID # unaryOperationLabelJump
     ;
 
 unaryOperator
@@ -36,13 +44,6 @@ binaryOperator
     | SUB
     | DIV
     | MUL
-    ;
-
-// instructions which have not results of execution
-instruction
-    : CALL
-    | RET
-    | JMP
     ;
 
 register
@@ -89,6 +90,7 @@ MUL : M U L;
 CALL : C A L L;
 RET : R E T;
 JMP : J M P;
+STI : S T I;
 
 fragment P : ('p'|'P');
 fragment B : ('b'|'B');
@@ -113,7 +115,7 @@ COMMA: ',';
 NUMBER: HEX_NUMBER | INT;
 HEX_NUMBER: [0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][hH];
 INT : [0-9]+;
-NEWLINE : '\r'? '\n';
+DELIM : '\r'? '\n';
 WS : [ \t]+ -> skip;
 
 fragment LETTER : [a-zA-Z\u0080-\u00FF_] ;

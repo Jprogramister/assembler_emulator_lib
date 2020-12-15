@@ -1,7 +1,10 @@
 package emulator.context;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class CodeStackContext {
-    public CodeStackContext clone() {
-        return this;
-    }
+    @Getter
+    @Setter
+    private long currentCommandIndex = 0;
 }
