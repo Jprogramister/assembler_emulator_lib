@@ -1,10 +1,10 @@
 package recognizer;
 
 import emulator.State;
-import lombok.NonNull;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -42,6 +42,8 @@ public final class Recognizer {
      * @return {@link State}
      */
     public static State recognize(ParseTree tree) {
-        return new State(tree);
+        var listener = new AssemblerListener();
+        new ParseTreeWalker().walk(listener, tree);
+        return new State(listener);
     }
 }

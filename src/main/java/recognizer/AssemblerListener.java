@@ -2,38 +2,33 @@ package recognizer;
 
 import antlr.AssemblerBaseListener;
 import antlr.AssemblerParser;
-import emulator.State;
+import emulator.context.LabelsContext;
+import emulator.context.StatementsContext;
+import emulator.statement.StatementType;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import emulator.statement.Statement;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @NoArgsConstructor
 public class AssemblerListener extends AssemblerBaseListener {
     @Getter
-    private List<Statement> statements = new ArrayList<Statement>();
+    private final StatementsContext statementsContext = new StatementsContext();
     @Getter
-    private Map<String, Long> labelLine = new HashMap<>();
+    private final LabelsContext labelsContext = new LabelsContext();
     private final AssemblerVisitor assemblerVisitor = new AssemblerVisitor();
-
-    public static List<Statement> generateStatements(ParseTree tree) {
-        var listener = new AssemblerListener();
-        new ParseTreeWalker().walk(listener, tree);
-        return listener.getStatements();
-    }
 
     @Override
     public void exitLabelDef(AssemblerParser.LabelDefContext ctx) {
         long lineNumber = ctx.getStart().getLine();
         String labelId = ctx.ID().getText();
-        labelLine.put(labelId, lineNumber);
+        try {
+            labelsContext.register(labelId, lineNumber);
+            add(new Statement(lineNumber, StatementType.LABEL_DEFINITION, state -> state));
+        } catch (LabelsContext.LabelDefinitionException e) {
+            log.error("Label definition error", e);
+            add(new Statement(lineNumber, StatementType.ERROR_STATEMENT, state -> null));
+        }
     }
 
     @Override
@@ -61,6 +56,6 @@ public class AssemblerListener extends AssemblerBaseListener {
     }
 
     private void add(@NonNull Statement s) {
-        statements.add(s);
+        statementsContext.add(s);
     }
 }

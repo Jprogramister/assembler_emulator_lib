@@ -84,23 +84,14 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
         try {
             log.debug("AssemblerVisitor visited unaryOperationLabelJump");
             String labelId = ctx.ID().getText();
-            Optional<Long> lineToJump = getLabelReferencedLine(labelId);
-            if (lineToJump.isEmpty()) {
-                return null;
-            }
             return InstructionStatementFactory.createJmpStatement(
                     ctx.getStart().getLine(),
-                    labelId,
-                    lineToJump.get()
+                    labelId
             );
         }
         catch (OperationParsingError ex) {
             log.error("Visit unary operation label jump error", ex);
             return null;
         }
-    }
-
-    private Optional<Long> getLabelReferencedLine(String labelId) throws OperationParsingError {
-        return Optional.of(labelLine.get(labelId));
     }
 }

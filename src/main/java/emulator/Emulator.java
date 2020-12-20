@@ -33,7 +33,7 @@ public class Emulator {
     /**
      * Do all available statements
      */
-    public void doAllStatements() {
+    public void doAllStatements() throws Exception {
         while (stepUp().isPresent()) {}
     }
 
@@ -41,7 +41,7 @@ public class Emulator {
      * Changes {@link Emulator#currentState} step by step to the state at specified index
      * @param index
      */
-    public synchronized void toStatement(int index) {
+    public synchronized void toStatement(int index) throws Exception {
         validateIndexOfStatement(index);
         while (currentStatementIndex != index) {
             if (currentStatementIndex > index) {
@@ -70,7 +70,7 @@ public class Emulator {
      * Changes {@link Emulator#currentState} to next if able
      * @return new value of {@link Emulator#currentState} or empty optional value if next state is not exists
      */
-    private synchronized Optional<State> stepUp() {
+    private synchronized Optional<State> stepUp() throws Exception {
         if (currentStatementIndex >= currentState.getStatements().size()) {
             return Optional.empty();
         }
@@ -81,7 +81,7 @@ public class Emulator {
     /**
      * Executes current statement, saves current statement to statements history and increments statements index
      */
-    private void executeCurrentStatement() {
+    private void executeCurrentStatement() throws Exception {
         currentState = currentState
                 .getStatements()
                 .get(currentStatementIndex)

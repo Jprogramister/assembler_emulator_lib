@@ -2,6 +2,16 @@ package emulator.statement;
 
 public enum StatementType {
     /**
+     * Statement with some error
+     */
+    ERROR_STATEMENT,
+
+    /**
+     * Definition of new label to jump
+     */
+    LABEL_DEFINITION,
+
+    /**
      * Instruction for CPU
      */
     JMP,

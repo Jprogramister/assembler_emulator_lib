@@ -1,26 +1,18 @@
 package emulator.context;
 
-import emulator.State;
 import emulator.statement.Statement;
-import lombok.AllArgsConstructor;
-import org.antlr.v4.runtime.tree.ParseTree;
-import recognizer.AssemblerListener;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
-@AllArgsConstructor
 public class StatementsContext {
-    private final List<Statement> statements;
-
-    public StatementsContext(ParseTree tree) {
-        this.statements = AssemblerListener.generateStatements(tree);
-    }
-
-    public StatementsContext clone() {
-        return this;
-    }
+    private final List<Statement> statements = new ArrayList<>();
+    /**
+     * Next instruction for execution
+     */
+    @Getter
+    private long currentStatement = 0;
 
     public int size() {
         return statements.size();
@@ -28,5 +20,24 @@ public class StatementsContext {
 
     public Statement get(int index) {
         return statements.get(index);
+    }
+
+    public void add(Statement s) {
+        statements.add(s);
+    }
+
+    public void setCurrentStatement(long statementIndex) throws Exception {
+        if (statementIndex >= statements.size() || statementIndex < 0) {
+            throw new Exception(String.format("Can not set statement at index %d", statementIndex));
+        }
+        currentStatement = statementIndex;
+    }
+
+    public void stepUp() throws Exception {
+        setCurrentStatement(getCurrentStatement() + 1);
+    }
+
+    public void stepBack() throws Exception {
+        setCurrentStatement(getCurrentStatement() - 1);
     }
 }
