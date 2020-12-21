@@ -13,13 +13,11 @@ public class AssemblerVisitorTest {
 
     @Before
     public void setUp() throws IOException {
-        parseTree = createParseTree("code.asm");
+        parseTree = createParseTree("allCorrectStatements.asm");
         assemblerVisitor = new AssemblerVisitor();
     }
 
-    /**
-     * Check {@link AssemblerVisitor} don't throws exception while process parsing tree
-     */
+    /* Check {@link AssemblerVisitor} don't throws exception while process parsing tree */
     @Test
     public void testParsingWorks() {
         assemblerVisitor.visit(parseTree);

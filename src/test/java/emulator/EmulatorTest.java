@@ -12,12 +12,12 @@ public class EmulatorTest {
 
     @BeforeClass
     public static void setUp() throws Exception {
-        ParseTree parseTree = createParseTree("code.asm");
+        ParseTree parseTree = createParseTree("allCorrectStatements.asm");
         emulator = new Emulator(Recognizer.recognize(parseTree));
     }
 
     @Test
-    public void doAllStatements() {
+    public void doAllStatements() throws Exception {
         emulator.doAllStatements();
     }
 

@@ -12,5 +12,6 @@
         <module name="Antlr4_Assembler" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="14" />
   </component>
 </project>

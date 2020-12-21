@@ -1,5 +1,7 @@
 package emulator.context;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,8 @@ public final class RegistersContext {
      * This value will be returned by method getValue if required register id is not initialized
      */
     private static final Number DEFAULT_REGISTER_VALUE = 0;
+
+    private final JsonMapper jsonMapper = new JsonMapper();
 
     /**
      * Values of registers. Key is id of register
@@ -78,5 +82,9 @@ public final class RegistersContext {
                 .append('\n');
         }
         return builder.toString();
+    }
+
+    public String toJson() throws JsonProcessingException {
+        return jsonMapper.writeValueAsString(registerValues);
     }
 }

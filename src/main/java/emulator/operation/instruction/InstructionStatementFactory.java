@@ -8,11 +8,5 @@ import emulator.statement.StatementType;
 public final class InstructionStatementFactory {
     private InstructionStatementFactory() {}
 
-    public static Statement createJmpStatement(long lineNumber, String labelId) throws OperationParsingError {
-        return new Statement(
-            lineNumber,
-            StatementType.JMP,
-            state -> InstructionOperationExecutor.jump(state, labelId)
-        );
-    }
+
 }

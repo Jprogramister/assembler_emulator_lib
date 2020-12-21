@@ -13,7 +13,7 @@ import java.util.function.Function;
 public final class BinaryStatementsFactory {
     private BinaryStatementsFactory() { }
 
-    public static Statement create(long lineNumber, Operation operator, String leftRegisterId, String rightRegisterId) {
+    public static Statement create(int lineNumber, Operation operator, String leftRegisterId, String rightRegisterId) {
        return new Statement(
                lineNumber,
                StatementType.BINARY_OPERATION_REGISTERS,
@@ -21,7 +21,7 @@ public final class BinaryStatementsFactory {
        );
     }
 
-    public static Statement create(long lineNumber, Operation operator, String leftRegisterId, Number rightValue) {
+    public static Statement create(int lineNumber, Operation operator, String leftRegisterId, Number rightValue) {
         return new Statement(
                 lineNumber,
                 StatementType.BINARY_OPERATION_REGISTER_CONST,

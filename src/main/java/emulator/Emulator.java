@@ -26,8 +26,8 @@ public class Emulator {
      * @param stream with assembler code
      * @return new statement of {@link Emulator}
      */
-    public static Emulator newFromCharStream(CharStream stream) {
-        return new Emulator(Recognizer.recognize(stream));
+    public Emulator(CharStream stream) {
+        this(Recognizer.recognize(stream));
     }
 
     /**
@@ -59,9 +59,9 @@ public class Emulator {
      * @throws IllegalArgumentException if index is not valid
      */
     private void validateIndexOfStatement(int index) throws IllegalArgumentException {
-        if (index < 0 || index >= currentState.getStatements().size()) {
+        if (index < 0 || index >= currentState.getStatementsContext().size()) {
             throw new IllegalArgumentException(
-                    String.format("Have not statement for index %s. Current statements amount %d", index, currentState.getStatements().size())
+                    String.format("Have not statement for index %s. Current statements amount %d", index, currentState.getStatementsContext().size())
             );
         }
     }
@@ -71,7 +71,7 @@ public class Emulator {
      * @return new value of {@link Emulator#currentState} or empty optional value if next state is not exists
      */
     private synchronized Optional<State> stepUp() throws Exception {
-        if (currentStatementIndex >= currentState.getStatements().size()) {
+        if (currentStatementIndex >= currentState.getStatementsContext().size()) {
             return Optional.empty();
         }
         executeCurrentStatement();
@@ -83,7 +83,7 @@ public class Emulator {
      */
     private void executeCurrentStatement() throws Exception {
         currentState = currentState
-                .getStatements()
+                .getStatementsContext()
                 .get(currentStatementIndex)
                 .apply(currentState);
         statementsCache.add(currentState);

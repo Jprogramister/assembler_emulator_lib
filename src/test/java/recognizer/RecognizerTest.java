@@ -1,23 +1,24 @@
 package recognizer;
 
 import emulator.State;
+import lombok.SneakyThrows;
 import org.junit.Assert;
 import org.junit.Test;
+import utils.CodeSamples;
 
 import java.io.IOException;
-
-import static org.junit.Assert.*;
 
 public class RecognizerTest {
     @Test
     public void recognizeTest() throws IOException {
-        // testRecognition("MOV ax, 2");
-        testRecognition("JMP some_label_name\n");
+        CodeSamples.getStandardCodeSamples().forEach(RecognizerTest::testRecognition);
     }
 
-    private void testRecognition(String code) throws IOException {
+    @SneakyThrows
+    private static void testRecognition(String code) {
         State state = Recognizer.recognize(code);
         Assert.assertNotNull(state);
-        Assert.assertEquals(1, state.getStatements().size());
+        Assert.assertNotEquals(0, state.getStatementsContext().size());
+        System.out.printf("State created from code \n %s %s%n", code, state.toString());
     }
 }

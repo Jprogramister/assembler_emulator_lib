@@ -2,6 +2,7 @@ package recognizer;
 
 import antlr.AssemblerBaseListener;
 import antlr.AssemblerParser;
+import emulator.context.LabelDefinitionException;
 import emulator.context.LabelsContext;
 import emulator.context.StatementsContext;
 import emulator.statement.StatementType;
@@ -20,12 +21,12 @@ public class AssemblerListener extends AssemblerBaseListener {
 
     @Override
     public void exitLabelDef(AssemblerParser.LabelDefContext ctx) {
-        long lineNumber = ctx.getStart().getLine();
+        int lineNumber = ctx.getStart().getLine();
         String labelId = ctx.ID().getText();
         try {
             labelsContext.register(labelId, lineNumber);
             add(new Statement(lineNumber, StatementType.LABEL_DEFINITION, state -> state));
-        } catch (LabelsContext.LabelDefinitionException e) {
+        } catch (LabelDefinitionException e) {
             log.error("Label definition error", e);
             add(new Statement(lineNumber, StatementType.ERROR_STATEMENT, state -> null));
         }

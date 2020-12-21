@@ -1,35 +1,51 @@
 package emulator.context;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Value;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class LabelsContext {
-    @Value
-    public static class Label {
-        String id;
-        Long definitionLineNumber;
-    }
+    private final JsonMapper jsonMapper = new JsonMapper();
+    private final Map<String, Label> labels = new HashMap<>();
 
-    public static class LabelDefinitionException extends Exception {
-        public LabelDefinitionException(String s) {
-            super(s);
+    @Override
+    public String toString() {
+        try {
+            return toJson();
+        } catch (JsonProcessingException e) {
+            log.error("LabelsContext to json mapping error", e);
+            return "{}";
         }
     }
 
-    private final Map<String, Label> labels = new HashMap<>();
+    public String toJson() throws JsonProcessingException {
+        return jsonMapper.writeValueAsString(labels);
+    }
 
-    public Label getLabel(String labelId) throws Exception {
+    /**
+     * Return registered label
+     * @param labelId unique id of label matches with {@link Label#id}
+     * @return instance of {@link Label}
+     * @throws LabelDefinitionException if required label is not registered
+     */
+    public Label getLabel(String labelId) throws LabelDefinitionException {
         if (!labels.containsKey(labelId)) {
-            throw new Exception(String.format("Label not found with id %s", labelId));
+            throw new LabelDefinitionException(String.format("Label not found with id %s", labelId));
         }
         return labels.get(labelId);
     }
 
-    public void register(String labelId, long lineNumber) throws LabelDefinitionException {
+    /**
+     * Save new label in context
+     * @param labelId unique id of label
+     * @param lineNumber line number where label was defined
+     * @throws LabelDefinitionException if label id already exists
+     */
+    public void register(String labelId, int lineNumber) throws LabelDefinitionException {
         if (labels.containsKey(labelId)) {
             throw new LabelDefinitionException(String.format("Label with id %s is already exists", labelId));
         }
