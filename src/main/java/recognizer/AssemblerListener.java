@@ -22,8 +22,8 @@ public class AssemblerListener extends AssemblerBaseListener {
     @Override
     public void exitLabelDef(AssemblerParser.LabelDefContext ctx) {
         int lineNumber = ctx.getStart().getLine();
-        String labelId = ctx.ID().getText();
         try {
+            String labelId = ctx.ID().getText();
             labelsContext.register(labelId, lineNumber);
             add(new Statement(lineNumber, StatementType.LABEL_DEFINITION, state -> state));
         } catch (LabelDefinitionException e) {

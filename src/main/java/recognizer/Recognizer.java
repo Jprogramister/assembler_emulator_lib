@@ -38,7 +38,7 @@ public final class Recognizer {
 
     /**
      * Creates {@link State} by {@link ParseTree}
-     * @param tree parse tree from {@link Utils#createParseTree(String)}
+     * @param tree parse tree
      * @return {@link State}
      */
     public static State recognize(ParseTree tree) {

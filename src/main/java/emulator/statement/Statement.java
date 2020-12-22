@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import emulator.State;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -20,7 +21,9 @@ public class Statement implements StatementAction<State, State> {
     /**
      * Line number where statement is located
      */
+    @Getter
     private final int statementIndex;
+    @Getter
     private final StatementType type;
     private final StatementAction<State, State> action;
 

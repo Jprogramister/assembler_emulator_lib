@@ -13,10 +13,8 @@ import java.util.stream.Collectors;
 @Slf4j
 public class StatementsContext {
     private final JsonMapper jsonMapper = new JsonMapper();
-    private final List<Statement> statements = new ArrayList<>();
-    /* Next instruction for execution */
     @Getter
-    private long currentStatement = 0;
+    private final List<Statement> statements = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -32,27 +30,8 @@ public class StatementsContext {
         return statements.size();
     }
 
-    public Statement get(int index) {
-        return statements.get(index);
-    }
-
     public void add(Statement s) {
         statements.add(s);
-    }
-
-    public void setCurrentStatement(long statementIndex) throws StatementsNavigationException {
-        if (statementIndex >= statements.size() || statementIndex < 0) {
-            throw new StatementsNavigationException(String.format("Can not set statement at index %d", statementIndex));
-        }
-        currentStatement = statementIndex;
-    }
-
-    public void stepUp() throws StatementsNavigationException {
-        setCurrentStatement(getCurrentStatement() + 1);
-    }
-
-    public void stepBack() throws StatementsNavigationException {
-        setCurrentStatement(getCurrentStatement() - 1);
     }
 
     public String toJson() throws JsonProcessingException {

@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
@@ -24,6 +25,10 @@ public class Utils {
     public static ParseTree createParseTree(@NonNull InputStream fileInputStream) throws IOException {
         CharStream stream = CharStreams.fromStream(fileInputStream);
         return createParseTree(stream);
+    }
+
+    public static ParseTree createParseTree(String code) throws IOException {
+        return  createParseTree(new ByteArrayInputStream(code.getBytes()));
     }
 
     public static ParseTree createParseTree(CharStream stream) {

@@ -1,7 +1,7 @@
 package emulator.statement;
 
 /**
- * Exception occurs on some statement execution
+ * Exception occurs on statement execution
  */
 public class StatementExecutionException extends Exception {
     public StatementExecutionException(String s) {

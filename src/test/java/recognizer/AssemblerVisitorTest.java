@@ -3,6 +3,8 @@ package recognizer;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Before;
 import org.junit.Test;
+import utils.CodeSamples;
+
 import java.io.IOException;
 
 import static recognizer.Utils.createParseTree;
@@ -13,7 +15,7 @@ public class AssemblerVisitorTest {
 
     @Before
     public void setUp() throws IOException {
-        parseTree = createParseTree("allCorrectStatements.asm");
+        parseTree = createParseTree(CodeSamples.readCodeSample("allCorrectStatements.asm"));
         assemblerVisitor = new AssemblerVisitor();
     }
 
