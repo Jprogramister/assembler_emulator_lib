@@ -1,22 +1,16 @@
-package recognizer;
+package emulator.recognizer;
 
-import antlr.AssemblerBaseVisitor;
-import antlr.AssemblerParser;
-import emulator.State;
+import emulator.antlr.AssemblerBaseVisitor;
+import emulator.antlr.AssemblerParser;
 import emulator.operation.Operation;
 import emulator.operation.OperationParsingError;
-import emulator.operation.instruction.InstructionStatementFactory;
-import emulator.operation.unary.UnaryOperation;
 import emulator.operation.unary.UnaryStatementFactory;
-import emulator.statement.StatementType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import emulator.statement.Statement;
 import emulator.operation.binary.BinaryStatementsFactory;
 
 import java.util.Map;
-import java.util.Optional;
 
 @Slf4j
 class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {

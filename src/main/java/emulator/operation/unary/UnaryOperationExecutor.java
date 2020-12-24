@@ -1,8 +1,8 @@
 package emulator.operation.unary;
 
 import emulator.State;
-import emulator.operation.Operation;
 import emulator.statement.StatementExecutionException;
+import emulator.operation.Operation;
 
 public final class UnaryOperationExecutor {
     private UnaryOperationExecutor() { }
@@ -10,7 +10,8 @@ public final class UnaryOperationExecutor {
     public static State jump(State state, String labelId) throws StatementExecutionException {
         var statements = state.getStatementsContext();
         var label = state.getLabelsContext().getLabel(labelId);
-        statements.setCurrentStatement(label.getDefinitionLineNumber() + 1);
+        var lineToJump = label.getDefinitionLineNumber() + 1;
+        state.getStatementsContext().setCurrentStatementIndex(lineToJump);
         return state;
     }
 

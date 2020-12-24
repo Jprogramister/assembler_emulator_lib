@@ -1,8 +1,8 @@
 package emulator.operation.binary;
 
-import emulator.operation.Operation;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import emulator.operation.Operation;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum BinaryOperation implements Operation {

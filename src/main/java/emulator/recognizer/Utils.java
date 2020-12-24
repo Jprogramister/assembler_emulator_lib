@@ -1,18 +1,16 @@
-package recognizer;
+package emulator.recognizer;
 
-import antlr.AssemblerLexer;
-import antlr.AssemblerParser;
+import emulator.antlr.AssemblerLexer;
+import emulator.antlr.AssemblerParser;
 import lombok.NonNull;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.function.Consumer;
 
 import static java.util.Objects.requireNonNull;
 
@@ -28,7 +26,7 @@ public class Utils {
     }
 
     public static ParseTree createParseTree(String code) throws IOException {
-        return  createParseTree(new ByteArrayInputStream(code.getBytes()));
+        return createParseTree(new ByteArrayInputStream(code.getBytes()));
     }
 
     public static ParseTree createParseTree(CharStream stream) {

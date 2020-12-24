@@ -1,7 +1,7 @@
-package recognizer;
+ package emulator.recognizer;
 
-import antlr.AssemblerBaseListener;
-import antlr.AssemblerParser;
+import emulator.antlr.AssemblerBaseListener;
+import emulator.antlr.AssemblerParser;
 import emulator.context.LabelDefinitionException;
 import emulator.context.LabelsContext;
 import emulator.context.StatementsContext;

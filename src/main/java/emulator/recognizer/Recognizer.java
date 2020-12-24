@@ -1,4 +1,4 @@
-package recognizer;
+package emulator.recognizer;
 
 import emulator.State;
 import org.antlr.v4.runtime.CharStream;

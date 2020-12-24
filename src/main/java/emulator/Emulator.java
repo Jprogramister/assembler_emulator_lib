@@ -7,11 +7,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.CharStream;
-import recognizer.Recognizer;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import emulator.recognizer.Recognizer;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -43,7 +39,7 @@ public class Emulator {
     }
 
     public int getCurrentStatementIndex() {
-        return stateMachine.getCurrentIndex();
+        return stateMachine.getStatementIndex();
     }
 
     public State next() throws StatementExecutionException {
@@ -58,6 +54,12 @@ public class Emulator {
             return null;
         }
         return stateMachine.goBack();
+    }
+
+    public void executeAll() throws StatementExecutionException {
+        while (stateMachine.hasNext()) {
+            stateMachine.goNext();
+        }
     }
 
     public void toStatement(int index) {

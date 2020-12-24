@@ -5,10 +5,9 @@ import emulator.context.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import recognizer.AssemblerListener;
+import emulator.recognizer.AssemblerListener;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 

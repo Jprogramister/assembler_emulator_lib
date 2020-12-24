@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import emulator.statement.Statement;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -15,6 +16,10 @@ public class StatementsContext {
     private final JsonMapper jsonMapper = new JsonMapper();
     @Getter
     private final List<Statement> statements = new ArrayList<>();
+
+    @Setter
+    @Getter
+    private int currentStatementIndex = 0;
 
     @Override
     public String toString() {

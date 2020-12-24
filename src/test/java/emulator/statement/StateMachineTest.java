@@ -31,7 +31,7 @@ public class StateMachineTest {
     @Test
     public void init() {
         stateMachine = new StateMachine(statements, null);
-        assertEquals(0, stateMachine.getCurrentIndex());
+        assertEquals(0, stateMachine.getStatementIndex());
         assertEquals(0, stateMachine.getCurrentStatement().getStatementIndex());
         assertTrue(stateMachine.hasNext());
         assertFalse(stateMachine.hasPrev());

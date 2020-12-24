@@ -1,4 +1,4 @@
-package recognizer;
+package emulator.recognizer;
 
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static recognizer.Utils.createParseTree;
+import static emulator.recognizer.Utils.createParseTree;
 
 public class AssemblerListenerTest {
     private ParseTree parseTree;
@@ -15,7 +15,7 @@ public class AssemblerListenerTest {
 
     @Before
     public void setUp() throws IOException {
-        parseTree = createParseTree("allCorrectStatements.asm");
+        parseTree = createParseTree("ru/programmister/code.asm");
         var assemblerVisitor = new AssemblerVisitor();
         assemblerListener = new AssemblerListener();
     }

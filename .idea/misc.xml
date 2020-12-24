@@ -23,6 +23,16 @@
           <option name="language" value="" />
           <option name="generateVisitor" value="true" />
         </PerGrammarGenerationSettings>
+        <PerGrammarGenerationSettings>
+          <option name="fileName" value="$PROJECT_DIR$/src/main/java/emulator/recognizer/grammar/Assembler.g4" />
+          <option name="autoGen" value="true" />
+          <option name="outputDir" value="C:\Users\User\IdeaProjects\Antlr4_Assembler_Emulator\src\main\java\emulator" />
+          <option name="libDir" value="" />
+          <option name="encoding" value="" />
+          <option name="pkg" value="emulator.antlr" />
+          <option name="language" value="" />
+          <option name="generateVisitor" value="true" />
+        </PerGrammarGenerationSettings>
       </list>
     </option>
   </component>

@@ -1,17 +1,17 @@
-package recognizer;
+package emulator.recognizer;
 
 import emulator.State;
 import lombok.SneakyThrows;
 import org.junit.Assert;
 import org.junit.Test;
-import utils.CodeSamples;
+
 
 import java.io.IOException;
 
 public class RecognizerTest {
     @Test
     public void recognizeTest() throws IOException {
-        CodeSamples.getStandardCodeSamples().forEach(RecognizerTest::testRecognition);
+       // emulator.CodeSamples.getStandardCodeSamples().forEach(RecognizerTest::testRecognition);
     }
 
     @SneakyThrows
