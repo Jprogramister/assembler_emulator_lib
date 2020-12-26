@@ -8,6 +8,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="emulator" />
+        <module name="backend" />
         <module name="Antlr4_Assembler" />
       </profile>
     </annotationProcessing>
