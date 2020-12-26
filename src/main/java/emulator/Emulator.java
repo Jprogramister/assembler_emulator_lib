@@ -27,7 +27,7 @@ public class Emulator {
 
     public Emulator(State initialState) {
         this.initialState = initialState;
-        this.stateMachine = new StateMachine(initialState.getStatementsContext().getStatements(), initialState);
+        this.stateMachine = new StateMachine(initialState);
     }
 
     public int getStatementsAmount() {
@@ -39,26 +39,26 @@ public class Emulator {
     }
 
     public int getCurrentStatementIndex() {
-        return stateMachine.getStatementIndex();
+        return stateMachine.getCurrentIndex();
     }
 
     public State next() throws StatementExecutionException {
         if (!stateMachine.hasNext()) {
             return null;
         }
-        return stateMachine.goNext();
+        return stateMachine.stepOver();
     }
 
     public State prev() {
         if (!stateMachine.hasPrev()) {
             return null;
         }
-        return stateMachine.goBack();
+        return stateMachine.stepBack();
     }
 
     public void executeAll() throws StatementExecutionException {
         while (stateMachine.hasNext()) {
-            stateMachine.goNext();
+            stateMachine.stepOver();
         }
     }
 

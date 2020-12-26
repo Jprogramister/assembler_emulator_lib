@@ -1,5 +1,6 @@
 package emulator.recognizer;
 
+import emulator.CodeSamples;
 import emulator.State;
 import lombok.SneakyThrows;
 import org.junit.Assert;
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class RecognizerTest {
     @Test
     public void recognizeTest() throws IOException {
-       // emulator.CodeSamples.getStandardCodeSamples().forEach(RecognizerTest::testRecognition);
+        testRecognition(CodeSamples.ALL);
     }
 
     @SneakyThrows

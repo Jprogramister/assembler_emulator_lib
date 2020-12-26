@@ -15,7 +15,7 @@ public class AssemblerVisitorTest {
 
     @Before
     public void setUp() throws IOException {
-        //parseTree = createParseTree(emulator.CodeSamples.readCodeSample("ru/programmister/code.asm"));
+        parseTree = createParseTree(emulator.CodeSamples.ALL);
         assemblerVisitor = new AssemblerVisitor();
     }
 

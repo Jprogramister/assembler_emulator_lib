@@ -1,49 +1,64 @@
 package emulator.statement;
 
-import org.junit.Before;
+import emulator.CodeSamples;
+import emulator.State;
+import emulator.context.StatementsContext;
+import emulator.recognizer.Recognizer;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
 public class StateMachineTest {
-    private static StateMachine stateMachine;
-    private static List<Statement> statements;
-
-    @Before
-    public void setUp() throws Exception {
-        statements = List.of(
-                mockStatement(0),
-                mockStatement(1),
-                mockStatement(2)
-        );
-        stateMachine = new StateMachine(statements, null);
+    private StateMachine createTestStateMachine() throws IOException {
+        return new StateMachine(Recognizer.recognize(CodeSamples.ALL));
     }
 
-    private Statement mockStatement(int lineNumber) {
-        Statement mockStatement = Mockito.mock(Statement.class);
+    private static State createInitialStateMock() {
+        var statements = List.of(
+                createMockStatement(0),
+                createMockStatement(1),
+                createMockStatement(2)
+        );
+        State initialStateMock = Mockito.mock(State.class);
+        var statementsMock = Mockito.mock(StatementsContext.class);
+        Mockito.when(statementsMock.getStatements()).thenReturn(statements);
+        Mockito.when(initialStateMock.getStatementsContext()).thenReturn(statementsMock);
+        return initialStateMock;
+    }
+
+    private static Statement createMockStatement(int lineNumber) {
+        var mockStatement = Mockito.mock(Statement.class);
         Mockito.when(mockStatement.getStatementIndex()).thenReturn(lineNumber);
         return mockStatement;
     }
 
+    /**
+     * Check initial state is valid
+     */
     @Test
-    public void init() {
-        stateMachine = new StateMachine(statements, null);
-        assertEquals(0, stateMachine.getStatementIndex());
-        assertEquals(0, stateMachine.getCurrentStatement().getStatementIndex());
+    public void init() throws IOException {
+        var stateMachine = createTestStateMachine();
+        assertEquals(0, stateMachine.getCurrentIndex());
+        assertEquals(0, stateMachine.getCurrentIndex());
         assertTrue(stateMachine.hasNext());
         assertFalse(stateMachine.hasPrev());
     }
 
+    /**
+     * Check transition between states is valid
+     * @throws StatementExecutionException on statement execution error
+     */
     @Test
-    public void statementsMovement() throws StatementExecutionException {
-        stateMachine = new StateMachine(statements, null);
-        assertEquals(0, stateMachine.getCurrentStatement().getStatementIndex());
-        stateMachine.goNext();
-        assertEquals(1, stateMachine.getCurrentStatement().getStatementIndex());
-        stateMachine.goBack();
-        assertEquals(0, stateMachine.getCurrentStatement().getStatementIndex());
+    public void statementsMovement() throws StatementExecutionException, IOException {
+        var stateMachine = createTestStateMachine();
+        assertEquals(0, stateMachine.getCurrentIndex());
+        stateMachine.stepOver();
+        assertEquals(1, stateMachine.getCurrentIndex());
+        stateMachine.stepBack();
+        assertEquals(0, stateMachine.getCurrentIndex());
     }
 }

@@ -1,24 +1,33 @@
 package emulator.statement;
 
 import emulator.State;
-import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RequiredArgsConstructor
 public class StateMachine {
     private final List<State> cache = new ArrayList<>();
     private final List<Statement> statements;
     private final State initialState;
 
-    public State goNext() throws IndexOutOfBoundsException, StatementExecutionException {
+    public StateMachine(State initialState) {
+        this.initialState = initialState;
+        statements = initialState.getStatementsContext().getStatements();
+    }
+
+    /**
+     * Executes current statement and move current index to next statement
+     * @return next state created by execution current statement
+     * @throws IndexOutOfBoundsException if there is not statement to execute
+     * @throws StatementExecutionException if some error on current statement execution occurred
+     */
+    public State stepOver() throws IndexOutOfBoundsException, StatementExecutionException {
         if (!hasNext()) {
             throw new IndexOutOfBoundsException("Can not execute next statements statements list is over");
         }
-        if (isCached(getStatementIndex())) {
+        if (isCached(getCurrentIndex())) {
             incStatementIndex();
-            return cache.get(getStatementIndex());
+            return cache.get(getCurrentIndex());
         } else {
             return executeCurrent();
         }
@@ -35,34 +44,34 @@ public class StateMachine {
     }
 
     public boolean hasNext() {
-        return getStatementIndex() != statements.size();
+        return getCurrentIndex() < statements.size();
     }
 
     public boolean hasPrev() {
-        return getStatementIndex() != 0;
+        return getCurrentIndex() != 0;
     }
 
     public Statement getCurrentStatement() {
-        return statements.get(getStatementIndex());
+        return statements.get(getCurrentIndex());
     }
 
     private State getCurrentState() {
-        if (getStatementIndex() == 0) {
+        if (getCurrentIndex() == 0) {
             return initialState;
         }
-        return cache.get(getStatementIndex() - 1);
+        return cache.get(getCurrentIndex() - 1);
     }
 
     private boolean isCached(int statementIndex) {
         return statementIndex < cache.size() - 1;
     }
 
-    public State goBack() throws IndexOutOfBoundsException {
+    public State stepBack() throws IndexOutOfBoundsException {
         if (!hasPrev()) {
             throw new IndexOutOfBoundsException("Can not execute next statements statements list is over");
         }
         decStatementIndex();
-        return cache.get(getStatementIndex());
+        return cache.get(getCurrentIndex());
     }
 
     private void incStatementIndex() {
@@ -77,7 +86,7 @@ public class StateMachine {
         statementsCtx.setCurrentStatementIndex(index - 1);
     }
 
-    public int getStatementIndex() {
+    public int getCurrentIndex() {
         return initialState.getStatementsContext().getCurrentStatementIndex();
     }
 }

@@ -13,32 +13,24 @@ import static java.util.Objects.requireNonNull;
  * Provides code samples for testing
  */
 public final class CodeSamples {
-    public CodeSamples() {}
+    private CodeSamples() {}
+
+    public static final String ALL = "mov AX , 1\n" +
+            "add ax, 2\n" +
+            "mov bx, 1\n" +
+            "sub ax, bx\n" +
+            "SOME_LABEL:\n" +
+            "push ax\n" +
+            "pop ax\n" +
+            "jmp SOME_LABEL\n";
 
     /**
      * List of correct code samples for testing
      * @return list of strings with assembler code
-     * @throws IOException if some file was not found
      */
-    public static List<String> getStandardCodeSamples() throws IOException {
+    public static List<String> getAllStatementsCode() {
         return List.of(
-            readCodeSample("code/code.asm")
+            CodeSamples.ALL
         );
-    }
-
-    @Test
-    public void testSamples() throws IOException {
-        readCodeSample("code/code.asm");
-    }
-
-    /**
-     * Reads file content from test resources
-     * @param sampleName name of file to read
-     * @return text of file
-     * @throws IOException if file was not found
-     */
-    public static String readCodeSample(String sampleName) throws IOException {
-        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(sampleName);
-        return IOUtils.toString(requireNonNull(stream), "UTF-8");
     }
 }
