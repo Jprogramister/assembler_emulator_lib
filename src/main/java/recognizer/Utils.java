@@ -19,6 +19,7 @@ public class Utils {
      * Loads file and creates parse tree by its text
      * @param fileInputStream input stream with file context
      * @throws IOException if {@link CharStream} create error was occured
+     * @return {@link ParseTree}
      */
     public static ParseTree createParseTree(@NonNull InputStream fileInputStream) throws IOException {
         CharStream stream = CharStreams.fromStream(fileInputStream);

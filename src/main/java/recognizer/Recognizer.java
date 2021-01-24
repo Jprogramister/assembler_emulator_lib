@@ -16,7 +16,7 @@ public final class Recognizer {
     private Recognizer() {}
 
     /**
-     * Creates {@link State} by {@link String)}
+     * Creates {@link State} by {@link String}
      * @param code string with assembler code
      * @return new instance of {@link State}
      * @throws IOException if code param is incorrect
