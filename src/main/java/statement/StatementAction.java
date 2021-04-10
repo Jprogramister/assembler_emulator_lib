@@ -2,5 +2,5 @@ package statement;
 
 @FunctionalInterface
 public interface StatementAction<T, R> {
-    R apply(T t) throws StatementExecutionException;
+  R apply(T t) throws StatementExecutionException;
 }

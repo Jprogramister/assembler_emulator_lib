@@ -1,15 +1,15 @@
 package operation.instruction;
 
-import operation.Operation;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import operation.Operation;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum InstructionOperation implements Operation {
-    LABEL_DEFINITION();
+  LABEL_DEFINITION();
 
-    @Override
-    public String getId() {
-        return null;
-    }
+  @Override
+  public String getId() {
+    return null;
+  }
 }

@@ -46,39 +46,7 @@ binaryOperator
     | MUL
     ;
 
-register
-    : commonRegister // registers for common usage
-    | codeRegister // registers for code navigation
-    | stackRegister // registers for stack navigation
-    | dataRegister // registers for data navigation
-    ;
-
-codeRegister: CS | CP;
-CS : C S;
-CP : C P;
-
-stackRegister: SS | SP;
-SS : S S;
-SP : S P;
-
-dataRegister: DS | DP;
-DS : D S;
-DP : D P;
-
-commonRegister
-    : AX | AL | AH
-    | BX | BH | BL
-    | CX | CH | CL
-    | DX | DH | DL
-    ;
-
-AX : A X;
-AL : A L;
-AH : A H;
-
-BX : B X;
-BH : B H;
-BL : B L;
+register : ID;
 
 PUSH : P U S H;
 POP : P O P;
@@ -91,6 +59,11 @@ CALL : C A L L;
 RET : R E T;
 JMP : J M P;
 STI : S T I;
+
+ID : LETTER (LETTER|DIGIT)*;
+
+DELIM : '\r'? '\n';
+WS : [ \t]+ -> skip;
 
 fragment P : ('p'|'P');
 fragment B : ('b'|'B');
@@ -111,13 +84,10 @@ fragment E : ('e'|'E');
 fragment T : ('t'|'T');
 fragment J : ('j'|'J');
 
-COMMA: ',';
-NUMBER: HEX_NUMBER | INT;
-HEX_NUMBER: [0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][hH];
-INT : [0-9]+;
-DELIM : '\r'? '\n';
-WS : [ \t]+ -> skip;
+fragment NUMBER: HEX_NUMBER | INT;
+fragment COMMA: ',';
+fragment HEX_NUMBER: [0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][hH];
+fragment INT : [0-9]+;
 
 fragment LETTER : [a-zA-Z\u0080-\u00FF_] ;
 fragment DIGIT : [0-9] ;
-ID : LETTER (LETTER|DIGIT)*;

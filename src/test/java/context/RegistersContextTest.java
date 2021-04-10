@@ -5,23 +5,23 @@ import org.junit.Test;
 
 public class RegistersContextTest {
 
-    @Before
-    public void setUp() throws Exception {
-    }
+  @Before
+  public void setUp() throws Exception {
+  }
 
-    @Test
-    public void getRegisterValue() {
-    }
+  @Test
+  public void getRegisterValue() {
+  }
 
-    @Test
-    public void setRegisterValue() {
-    }
+  @Test
+  public void setRegisterValue() {
+  }
 
-    @Test
-    public void cloneAndSet() {
-    }
+  @Test
+  public void cloneAndSet() {
+  }
 
-    @Test
-    public void testToString() {
-    }
+  @Test
+  public void testToString() {
+  }
 }

@@ -10,11 +10,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Antlr4Study" />
         <module name="Antlr4_Assembler" />
+        <module name="assembler-emulator" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="14">
-      <module name="backend" target="15" />
-      <module name="emulator" target="14" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="14" />
   </component>
 </project>

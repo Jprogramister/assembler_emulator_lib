@@ -6,14 +6,14 @@ import operation.Operation;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum BinaryOperation implements Operation {
-    ADD("ADD"),
-    SUB("SUB"),
-    MOV("MOV");
+  ADD("ADD"),
+  SUB("SUB"),
+  MOV("MOV");
 
-    private final String id;
+  private final String id;
 
-    @Override
-    public String getId() {
-        return this.id;
-    }
+  @Override
+  public String getId() {
+    return this.id;
+  }
 };

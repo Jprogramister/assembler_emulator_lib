@@ -1,19 +1,19 @@
 package operation.unary;
 
-import operation.Operation;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import operation.Operation;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum UnaryOperation implements Operation {
-    POP("POP"),
-    JMP("JMP"),
-    PUSH("PUSH");
+  POP("POP"),
+  JMP("JMP"),
+  PUSH("PUSH");
 
-    private final String id;
+  private final String id;
 
-    @Override
-    public String getId() {
-        return this.id;
-    }
+  @Override
+  public String getId() {
+    return this.id;
+  }
 }
