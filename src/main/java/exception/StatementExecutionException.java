@@ -1,4 +1,4 @@
-package statement;
+package exception;
 
 /**
  * Exception occurs on statement execution

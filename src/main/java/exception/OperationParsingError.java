@@ -1,4 +1,4 @@
-package operation;
+package exception;
 
 public class OperationParsingError extends Exception {
   public OperationParsingError(String s) {

@@ -1,8 +1,8 @@
 package recognizer;
 
 
-import context.LabelDefinitionException;
-import context.LabelsContext;
+import exception.LabelDefinitionException;
+import state.Labels;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import recognizer.generated.AssemblerBaseListener;
 import recognizer.generated.AssemblerParser;
 import statement.Statement;
-import statement.StatementType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ public class AssemblerListener extends AssemblerBaseListener {
   @Getter
   private final List<Statement> statements = new ArrayList<>();
   @Getter
-  private final LabelsContext labelsContext = new LabelsContext();
+  private final Labels labelsContext = new Labels();
   private final AssemblerVisitor assemblerVisitor = new AssemblerVisitor();
 
   @Override
@@ -30,10 +29,10 @@ public class AssemblerListener extends AssemblerBaseListener {
     try {
       String labelId = ctx.ID().getText();
       labelsContext.register(labelId, lineNumber);
-      add(new Statement(lineNumber, StatementType.LABEL_DEFINITION, state -> state));
+      add(new Statement(lineNumber, Statement.Type.LABEL_DEFINITION, state -> state));
     } catch (LabelDefinitionException e) {
       log.error("Label definition error", e);
-      add(new Statement(lineNumber, StatementType.ERROR_STATEMENT, state -> null));
+      add(new Statement(lineNumber, Statement.Type.ERROR_STATEMENT, state -> null));
     }
   }
 

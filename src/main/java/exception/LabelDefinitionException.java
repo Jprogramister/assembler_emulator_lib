@@ -1,6 +1,6 @@
-package context;
+package exception;
 
-import statement.StatementExecutionException;
+import exception.StatementExecutionException;
 
 /**
  * Will be thrown on attempt repeat label definition of attempt get nonexistent label

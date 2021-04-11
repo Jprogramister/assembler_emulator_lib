@@ -1,14 +1,15 @@
-package context;
+package state;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import exception.LabelDefinitionException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class LabelsContext {
+public class Labels {
   private final JsonMapper jsonMapper = new JsonMapper();
   private final Map<String, Label> labels = new HashMap<>();
 

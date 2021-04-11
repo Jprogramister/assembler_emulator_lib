@@ -1,6 +1,6 @@
 package recognizer;
 
-import context.State;
+import state.State;
 import emulator.CodeSamples;
 import lombok.SneakyThrows;
 import org.junit.Assert;

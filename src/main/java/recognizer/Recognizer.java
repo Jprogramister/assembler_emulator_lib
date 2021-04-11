@@ -1,6 +1,6 @@
 package recognizer;
 
-import context.State;
+import state.State;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.tree.ParseTree;

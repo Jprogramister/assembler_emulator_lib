@@ -1,15 +1,17 @@
-package context;
+package state;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@NoArgsConstructor
 /**
  * Context of registers
  */
-public final class RegistersContext {
+public class Registers {
   /**
    * This value will be returned by method getValue if required register id is not initialized
    */
@@ -20,14 +22,10 @@ public final class RegistersContext {
   /**
    * Values of registers. Key is id of register
    */
-  private Map<String, Number> registerValues = new HashMap<String, Number>();
+  private Map<String, Number> registerValues;
 
-  public RegistersContext(Map<String, Number> registerValues) {
+  public Registers(Map<String, Number> registerValues) {
     this.registerValues = registerValues;
-  }
-
-  public RegistersContext() {
-
   }
 
   /**
@@ -58,12 +56,12 @@ public final class RegistersContext {
    *
    * @param registerId id which should be changed
    * @param value      value to set
-   * @return changed copy {@link RegistersContext}
+   * @return changed copy {@link Registers}
    */
-  public RegistersContext cloneAndSet(String registerId, Number value) {
+  public Registers set(String registerId, Number value) {
     Map<String, Number> valuesCopy = new HashMap<>(registerValues);
     valuesCopy.put(registerId, value);
-    return new RegistersContext(valuesCopy);
+    return new Registers(valuesCopy);
   }
 
   /**

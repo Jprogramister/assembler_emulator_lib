@@ -1,9 +1,9 @@
-package context;
+package exception;
 
-import statement.StatementExecutionException;
+import exception.StatementExecutionException;
 
 /**
- * Exception occurs on {@link StatementsSet} navigation methods
+ * Exception occurs on attempt of jump to unreal index of line
  */
 public class StatementsNavigationException extends StatementExecutionException {
   public StatementsNavigationException(String s) {

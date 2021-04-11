@@ -1,21 +1,15 @@
 package recognizer;
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import operation.Operation;
-import operation.OperationParsingError;
-import operation.StatementFactory;
+import statement.Operation;
+import exception.OperationParsingError;
+import statement.StatementFactory;
 import recognizer.generated.AssemblerBaseVisitor;
 import recognizer.generated.AssemblerParser;
 import statement.Statement;
 
-import java.util.Map;
-
 @Slf4j
 class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
-  @Getter
-  private Map<String, Long> labelLine;
-
   @Override
   public Statement visitProgramm(AssemblerParser.ProgrammContext ctx) {
     return visitChildren(ctx);

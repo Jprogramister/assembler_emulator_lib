@@ -1,4 +1,4 @@
-package context;
+package state;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -21,36 +21,43 @@ import static java.lang.String.format;
 public class State {
   private final ObjectMapper objectMapper = new ObjectMapper();
   private final Deque<Number> callStack = new ArrayDeque<>();
-  private final RegistersContext registersContext;
+  private final Registers registers;
   private final List<Statement> statements;
   private final ListIterator<Statement> statementIterator;
-  private final LabelsContext labelsContext;
+  private final Labels labels;
 
   public State(AssemblerListener listener) {
     this(
-            new RegistersContext(),
+            new Registers(),
             listener.getStatements(),
             listener.getStatements().listIterator(),
             listener.getLabelsContext()
     );
   }
 
-  /**
-   * Creates new instance of state by this with other resgiters context
-   *
-   * @param ctx registers context for new instance
-   * @return {@link State}
-   */
-  public State cloneWithRegisters(final RegistersContext ctx) {
+  public State setRegister(String id, Number value) {
     return new State(
-            ctx,
+            registers.set(id, value),
             this.statements,
             this.statementIterator,
-            this.labelsContext
+            this.labels
     );
   }
 
-  public void jumpTo(int index) {
+  public Number gerRegisterValue(String id) {
+    return registers.getRegisterValue(id);
+  }
+
+  public State push(Number value) {
+    callStack.push(value);
+    return this;
+  }
+
+  public Number pop() {
+    return callStack.pop();
+  }
+
+  public State jumpTo(int index) {
     validate(index);
     while (statementIterator.nextIndex() - 1 != index) {
       if (statementIterator.nextIndex() - 1 > index) {
@@ -59,6 +66,7 @@ public class State {
         statementIterator.next();
       }
     }
+    return this;
   }
 
   private void validate(int index) {
@@ -71,9 +79,9 @@ public class State {
   public String toJson() throws IOException {
     Map<String, String> json = new HashMap<>();
     json.put("callStackContext", callStack.toString());
-    json.put("registersContext", registersContext.toJson());
+    json.put("registersContext", registers.toJson());
     json.put("statementsContext", statements.toString());
-    json.put("labelsContext", labelsContext.toJson());
+    json.put("labelsContext", labels.toJson());
     return objectMapper.writeValueAsString(json);
   }
 
