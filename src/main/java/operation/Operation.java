@@ -1,8 +1,5 @@
 package operation;
 
-import operation.binary.BinaryOperation;
-import operation.unary.UnaryOperation;
-
 public interface Operation {
   String getId();
 
@@ -13,8 +10,9 @@ public interface Operation {
    * @return instance of {@link Operation}
    * @throws OperationParsingError if string contains unknown operation id or other incorrect text
    */
-  public static Operation parse(String id) throws OperationParsingError {
+  static Operation parse(String id) throws OperationParsingError {
     id = id.toUpperCase();
+
     if (BinaryOperation.ADD.getId().equals(id)) {
       return BinaryOperation.ADD;
     }

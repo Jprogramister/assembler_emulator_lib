@@ -1,7 +1,6 @@
-package operation.unary;
+package operation;
 
 import context.State;
-import operation.Operation;
 import statement.StatementExecutionException;
 
 public final class UnaryOperationExecutor {
@@ -9,10 +8,10 @@ public final class UnaryOperationExecutor {
   }
 
   public static State jump(State state, String labelId) throws StatementExecutionException {
-    var statements = state.getStatementsSet();
+    var statements = state.getStatements();
     var label = state.getLabelsContext().getLabel(labelId);
     var lineToJump = label.getDefinitionLineNumber() + 1;
-    state.getStatementsSet().jumpTo(lineToJump);
+    state.jumpTo(lineToJump);
     return state;
   }
 

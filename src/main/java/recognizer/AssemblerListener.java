@@ -3,7 +3,6 @@ package recognizer;
 
 import context.LabelDefinitionException;
 import context.LabelsContext;
-import context.StatementsSet;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -13,11 +12,14 @@ import recognizer.generated.AssemblerParser;
 import statement.Statement;
 import statement.StatementType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @NoArgsConstructor
 public class AssemblerListener extends AssemblerBaseListener {
   @Getter
-  private final StatementsSet statementsContext = new StatementsSet();
+  private final List<Statement> statements = new ArrayList<>();
   @Getter
   private final LabelsContext labelsContext = new LabelsContext();
   private final AssemblerVisitor assemblerVisitor = new AssemblerVisitor();
@@ -63,6 +65,6 @@ public class AssemblerListener extends AssemblerBaseListener {
   }
 
   private void add(@NonNull Statement s) {
-    statementsContext.add(s);
+    statements.add(s);
   }
 }

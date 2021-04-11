@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import recognizer.AssemblerListener;
+import statement.Statement;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+import static java.lang.String.format;
 
 /**
  * Aggregation of CPU context states and list of code statements
@@ -18,18 +20,17 @@ import java.util.Map;
 @Slf4j
 public class State {
   private final ObjectMapper objectMapper = new ObjectMapper();
-  private final CallStackContext callStack;
-  @Getter
+  private final Deque<Number> callStack = new ArrayDeque<>();
   private final RegistersContext registersContext;
-  private final StatementsSet statementsSet;
-  @Getter
+  private final List<Statement> statements;
+  private final ListIterator<Statement> statementIterator;
   private final LabelsContext labelsContext;
 
   public State(AssemblerListener listener) {
     this(
-            new CallStackContext(),
             new RegistersContext(),
-            listener.getStatementsContext(),
+            listener.getStatements(),
+            listener.getStatements().listIterator(),
             listener.getLabelsContext()
     );
   }
@@ -42,18 +43,36 @@ public class State {
    */
   public State cloneWithRegisters(final RegistersContext ctx) {
     return new State(
-            this.callStack,
             ctx,
-            this.statementsSet,
+            this.statements,
+            this.statementIterator,
             this.labelsContext
     );
   }
 
+  public void jumpTo(int index) {
+    validate(index);
+    while (statementIterator.nextIndex() - 1 != index) {
+      if (statementIterator.nextIndex() - 1 > index) {
+        statementIterator.previous();
+      } else {
+        statementIterator.next();
+      }
+    }
+  }
+
+  private void validate(int index) {
+    if (index < 0 || index >= statements.size()) {
+      throw new IndexOutOfBoundsException(
+              format("Can't jump to index %d statements list size = %d", index, statements.size()));
+    }
+  }
+
   public String toJson() throws IOException {
     Map<String, String> json = new HashMap<>();
-    json.put("callStackContext", callStack.toJson());
+    json.put("callStackContext", callStack.toString());
     json.put("registersContext", registersContext.toJson());
-    json.put("statementsContext", statementsSet.toJson());
+    json.put("statementsContext", statements.toString());
     json.put("labelsContext", labelsContext.toJson());
     return objectMapper.writeValueAsString(json);
   }

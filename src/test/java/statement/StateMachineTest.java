@@ -26,7 +26,7 @@ public class StateMachineTest {
 
   private static Statement createMockStatement(int lineNumber) {
     var mockStatement = Mockito.mock(Statement.class);
-    Mockito.when(mockStatement.getStatementIndex()).thenReturn(lineNumber);
+    Mockito.when(mockStatement.getIndex()).thenReturn(lineNumber);
     return mockStatement;
   }
 

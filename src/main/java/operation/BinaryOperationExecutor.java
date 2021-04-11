@@ -1,8 +1,7 @@
-package operation.binary;
+package operation;
 
 import context.RegistersContext;
 import context.State;
-import operation.Operation;
 
 /**
  * Aggregation of functions that perform binary operators
@@ -36,8 +35,6 @@ public final class BinaryOperationExecutor {
    * @return new or old changed state
    */
   public static State perform(Operation operator, String leftRegisterId, Number rightValue, State state) {
-    requireBinaryOperation(operator);
-
     RegistersContext ctx = state.getRegistersContext();
     var leftValue = ctx.getRegisterValue(leftRegisterId);
     var id = operator.getId();
@@ -61,13 +58,5 @@ public final class BinaryOperationExecutor {
     }
 
     throw new UnsupportedOperationException(String.format("Cannot execute operation %s ", id));
-  }
-
-  private static void requireBinaryOperation(Operation operation) throws IllegalArgumentException {
-    if (!(operation instanceof BinaryOperation)) {
-      throw new IllegalArgumentException(
-              String.format("Operation should be instance of BinaryOperation but %s accepted", operation.getClass().getName())
-      );
-    }
   }
 }

@@ -1,4 +1,4 @@
-package operation.instruction;
+package operation;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

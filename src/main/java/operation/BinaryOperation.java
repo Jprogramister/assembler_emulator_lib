@@ -1,14 +1,14 @@
-package operation.unary;
+package operation;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import operation.Operation;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public enum UnaryOperation implements Operation {
-  POP("POP"),
-  JMP("JMP"),
-  PUSH("PUSH");
+public enum BinaryOperation implements Operation {
+  ADD("ADD"),
+  SUB("SUB"),
+  MOV("MOV");
 
   private final String id;
 
@@ -16,4 +16,4 @@ public enum UnaryOperation implements Operation {
   public String getId() {
     return this.id;
   }
-}
+};

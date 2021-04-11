@@ -22,8 +22,7 @@ public class Statement implements StatementAction<State, State> {
    * Line number where statement is located
    */
   @Getter
-  private final int statementIndex;
-  @Getter
+  private final int index;
   private final StatementType type;
   private final StatementAction<State, State> action;
 
@@ -46,9 +45,10 @@ public class Statement implements StatementAction<State, State> {
     }
   }
 
+  // TODO test GSON serialization
   public String toJson() throws JsonProcessingException {
     Map<String, String> jsonRepresentation = new HashMap<>();
-    jsonRepresentation.put("statementIndex", String.valueOf(statementIndex));
+    jsonRepresentation.put("statementIndex", String.valueOf(index));
     jsonRepresentation.put("type", type.name());
     return jsonMapper.writeValueAsString(jsonRepresentation);
   }

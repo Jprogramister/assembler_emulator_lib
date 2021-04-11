@@ -4,8 +4,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import operation.Operation;
 import operation.OperationParsingError;
-import operation.binary.BinaryStatementsFactory;
-import operation.unary.UnaryStatementFactory;
+import operation.StatementFactory;
 import recognizer.generated.AssemblerBaseVisitor;
 import recognizer.generated.AssemblerParser;
 import statement.Statement;
@@ -37,9 +36,9 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
     int lineNumber = ctx.getStart().getLine();
     try {
       log.debug("AssemblerVisitor visited unaryOperationRegister");
-      String operatorId = ctx.unaryOperator().getText();
-      String registerId = ctx.register().getText();
-      return UnaryStatementFactory.create(lineNumber, Operation.parse(operatorId), registerId);
+      var operatorId = ctx.unaryOperator().getText();
+      var registerId = ctx.register().getText();
+      return StatementFactory.createUnary(lineNumber, Operation.parse(operatorId), registerId);
     } catch (OperationParsingError e) {
       log.error("Unary operation parsing error", e);
       return Statement.emptyStatement(lineNumber);
@@ -57,7 +56,7 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
       String operatorId = ctx.binaryOperator().getText();
       var leftRegister = ctx.register(0).getText();
       var rightRegister = ctx.register(1).getText();
-      return BinaryStatementsFactory.create(
+      return StatementFactory.createBinary(
               lineNumber,
               Operation.parse(operatorId),
               leftRegister, rightRegister
@@ -79,7 +78,7 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
       String operatorId = ctx.binaryOperator().getText();
       var leftRegisterId = ctx.register().getText();
       var rightConstValue = Double.valueOf(ctx.NUMBER().getText());
-      return BinaryStatementsFactory.create(lineNumber, Operation.parse(operatorId), leftRegisterId, rightConstValue);
+      return StatementFactory.createBinary(lineNumber, Operation.parse(operatorId), leftRegisterId, rightConstValue);
     } catch (OperationParsingError ex) {
       log.error("Binary operation parsing error ", ex);
       return Statement.emptyStatement(lineNumber);
@@ -92,7 +91,7 @@ class AssemblerVisitor extends AssemblerBaseVisitor<Statement> {
     try {
       log.debug("AssemblerVisitor visited unaryOperationLabelJump");
       String labelId = ctx.ID().getText();
-      return UnaryStatementFactory.createJmpStatement(lineNumber, labelId);
+      return StatementFactory.createJmp(lineNumber, labelId);
     } catch (OperationParsingError ex) {
       log.error("Visit unary operation label jump error", ex);
       return Statement.emptyStatement(lineNumber);
