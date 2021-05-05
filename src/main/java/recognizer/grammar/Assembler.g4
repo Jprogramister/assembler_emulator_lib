@@ -6,14 +6,14 @@ programm: command+;
 command
     : unaryOperation DELIM
     | binaryOperation DELIM
-    | labelDef DELIM
     | instruction DELIM
+    | labelDef DELIM
     ;
 
 // definition of label for usage in jmp instruction
 labelDef: ID ':';
 
-//
+// operation without arguments
 instruction
     : RET # procedureReturn
     | STI # resetInterruptionFlag
@@ -34,7 +34,7 @@ unaryOperator
 
 // operations with two arguments
 binaryOperation
-    : binaryOperator register COMMA register  # binaryOperationRegisters
+    : binaryOperator register COMMA register # binaryOperationRegisters
     | binaryOperator register COMMA NUMBER # binaryOperationRegisterConst
     ;
 
@@ -84,10 +84,10 @@ fragment E : ('e'|'E');
 fragment T : ('t'|'T');
 fragment J : ('j'|'J');
 
-fragment NUMBER: HEX_NUMBER | INT;
-fragment COMMA: ',';
+NUMBER: HEX_NUMBER | INT;
+COMMA: ',';
 fragment HEX_NUMBER: [0-9A-Z][0-9A-Z][0-9A-Z][0-9A-Z][hH];
 fragment INT : [0-9]+;
 
-fragment LETTER : [a-zA-Z\u0080-\u00FF_] ;
-fragment DIGIT : [0-9] ;
+fragment LETTER : [a-zA-Z\u0080-\u00FF_];
+fragment DIGIT : [0-9];

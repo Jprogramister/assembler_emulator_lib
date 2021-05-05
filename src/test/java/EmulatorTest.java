@@ -12,7 +12,7 @@ public class EmulatorTest {
 
   @BeforeClass
   public static void setUp() throws IOException {
-    ParseTree parseTree = Utils.createParseTree(CodeSamples.ALL);
+    var parseTree = Utils.createParseTree(CodeSamples.ALL);
     emulator = new Emulator(Recognizer.recognize(parseTree));
   }
 

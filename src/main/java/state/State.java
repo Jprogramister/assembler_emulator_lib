@@ -1,10 +1,9 @@
 package state;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import exception.LabelDefinitionException;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-import recognizer.AssemblerListener;
+import recognizer.AstWalker;
 import statement.Statement;
 
 import java.io.IOException;
@@ -15,9 +14,7 @@ import static java.lang.String.format;
 /**
  * Aggregation of CPU context states and list of code statements
  */
-@Getter
 @AllArgsConstructor
-@Slf4j
 public class State {
   private final ObjectMapper objectMapper = new ObjectMapper();
   private final Deque<Number> callStack = new ArrayDeque<>();
@@ -26,13 +23,25 @@ public class State {
   private final ListIterator<Statement> statementIterator;
   private final Labels labels;
 
-  public State(AssemblerListener listener) {
+  public State(AstWalker listener) {
     this(
             new Registers(),
             listener.getStatements(),
             listener.getStatements().listIterator(),
-            listener.getLabelsContext()
+            listener.getLabels()
     );
+  }
+
+  public int statementsCount() {
+    return statements.size();
+  }
+
+  public Statement next() {
+    return statementIterator.next();
+  }
+
+  public boolean hasNext() {
+    return statementIterator.hasNext();
   }
 
   public State setRegister(String id, Number value) {
@@ -44,7 +53,11 @@ public class State {
     );
   }
 
-  public Number gerRegisterValue(String id) {
+  public Label getLabel(String id) throws LabelDefinitionException {
+    return labels.getLabel(id);
+  }
+
+  public Number getRegisterValue(String id) {
     return registers.getRegisterValue(id);
   }
 
@@ -76,21 +89,16 @@ public class State {
     }
   }
 
-  public String toJson() throws IOException {
-    Map<String, String> json = new HashMap<>();
-    json.put("callStackContext", callStack.toString());
-    json.put("registersContext", registers.toJson());
-    json.put("statementsContext", statements.toString());
-    json.put("labelsContext", labels.toJson());
-    return objectMapper.writeValueAsString(json);
-  }
-
   @Override
   public String toString() {
     try {
-      return toJson();
+      Map<String, String> json = new HashMap<>();
+      json.put("callStackContext", callStack.toString());
+      json.put("registersContext", registers.toString());
+      json.put("statementsContext", statements.toString());
+      json.put("labelsContext", labels.toString());
+      return objectMapper.writeValueAsString(json);
     } catch (IOException e) {
-      log.error("context.State to string mapping error", e);
       return "{}";
     }
   }

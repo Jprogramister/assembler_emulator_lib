@@ -1,17 +1,15 @@
-import state.State;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import exception.StatementExecutionException;
 import lombok.extern.slf4j.Slf4j;
 import org.antlr.v4.runtime.CharStream;
 import recognizer.Recognizer;
+import state.State;
 import statement.StateMachine;
 
-@RequiredArgsConstructor
+import java.util.Collection;
+
 @Slf4j
 public class Emulator {
-  private final StateMachine stateMachine;
-  @Getter
-  private final State initialState;
+  private StateMachine stateMachine;
 
   /**
    * Creates {@link Emulator} from stream
@@ -24,10 +22,26 @@ public class Emulator {
   }
 
   public Emulator(State initialState) {
-    this.initialState = initialState;
     this.stateMachine = new StateMachine(initialState);
   }
 
-  public void executeAll() {
+  public void executeAll() throws StatementExecutionException {
+    stateMachine.executeAll();
+  }
+
+  public void executeCurrent() throws StatementExecutionException {
+    stateMachine.executeCurrent();
+  }
+
+  public Collection<State> cache() {
+    return stateMachine.cache();
+  }
+
+  public void rollbackTo(int index) {
+    stateMachine.rollbackTo(index);
+  }
+
+  public State currentState() {
+    return stateMachine.state();
   }
 }

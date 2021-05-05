@@ -10,18 +10,18 @@ import java.io.IOException;
 
 import static recognizer.Utils.createParseTree;
 
-public class AssemblerListenerTest {
+public class AssemblerAstWalkerTest {
   private ParseTree parseTree;
-  private AssemblerListener assemblerListener;
+  private AstWalker assemblerListener;
 
   @Before
   public void setUp() throws IOException {
     parseTree = createParseTree(CodeSamples.ALL);
-    assemblerListener = new AssemblerListener();
+    assemblerListener = new AstWalker();
   }
 
   /**
-   * Check {@link AssemblerListener} don't throws exceptions while walk on parse tree
+   * Check {@link AstWalker} don't throws exceptions while walk on parse tree
    */
   @Test
   public void visitTest() {

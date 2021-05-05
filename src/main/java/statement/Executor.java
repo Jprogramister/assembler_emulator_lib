@@ -23,8 +23,7 @@ public final class Executor {
    * @return new or old changed state
    */
   public static State performBinary(State state, Operation operator, String leftRegisterId, String rightRegisterId) {
-    Registers ctx = state.getRegisters();
-    var rightValue = ctx.getRegisterValue(rightRegisterId);
+    var rightValue = state.getRegisterValue(rightRegisterId);
     return performBinary(state, operator, leftRegisterId, rightValue);
   }
 
@@ -38,7 +37,7 @@ public final class Executor {
    * @return new or old changed state
    */
   public static State performBinary(State state, Operation operator, String leftRegisterId, Number rvalue) {
-    var lvalue = state.gerRegisterValue(leftRegisterId);
+    var lvalue = state.getRegisterValue(leftRegisterId);
     return switch (operator) {
       case ADD -> state.setRegister(leftRegisterId, lvalue.doubleValue() + rvalue.doubleValue());
       case SUB -> state.setRegister(leftRegisterId, lvalue.doubleValue() - rvalue.doubleValue());
@@ -50,8 +49,8 @@ public final class Executor {
   public static State performUnary(State state, Operation operator, String registerId)
           throws UnsupportedOperationException, IllegalArgumentException {
     return switch (operator) {
-      case PUSH -> state.push(state.getRegisters().getRegisterValue(registerId));
-      case POP -> state.setRegister(registerId, state.getCallStack().pop());
+      case PUSH -> state.push(state.getRegisterValue(registerId));
+      case POP -> state.setRegister(registerId, state.pop());
       default -> throw new UnsupportedOperationException(format("Unknown unary operation %s", operator.getId()));
     };
   }
@@ -65,7 +64,7 @@ public final class Executor {
   }
 
   public static State jump(State state, String labelId) throws StatementExecutionException {
-    var label = state.getLabels().getLabel(labelId);
+    var label = state.getLabel(labelId);
     var lineToJump = label.getDefinitionLineNumber() + 1;
     return state.jumpTo(lineToJump);
   }

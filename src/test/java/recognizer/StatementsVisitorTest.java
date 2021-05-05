@@ -8,19 +8,19 @@ import java.io.IOException;
 
 import static recognizer.Utils.createParseTree;
 
-public class AssemblerVisitorTest {
+public class StatementsVisitorTest {
   private ParseTree parseTree;
-  private AssemblerVisitor assemblerVisitor;
+  private StatementsVisitor visitor;
 
   @Before
   public void setUp() throws IOException {
     parseTree = createParseTree(emulator.CodeSamples.ALL);
-    assemblerVisitor = new AssemblerVisitor();
+    visitor = new StatementsVisitor();
   }
 
   /* Check {@link AssemblerVisitor} don't throws exception while process parsing tree */
   @Test
   public void testParsingWorks() {
-    assemblerVisitor.visit(parseTree);
+    visitor.visit(parseTree);
   }
 }

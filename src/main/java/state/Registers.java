@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import java.util.HashMap;
 import java.util.Map;
 
-@NoArgsConstructor
 /**
  * Context of registers
  */
+@NoArgsConstructor
 public class Registers {
   /**
    * This value will be returned by method getValue if required register id is not initialized
@@ -22,7 +22,7 @@ public class Registers {
   /**
    * Values of registers. Key is id of register
    */
-  private Map<String, Number> registerValues;
+  private Map<String, Number> registerValues = new HashMap<>();
 
   public Registers(Map<String, Number> registerValues) {
     this.registerValues = registerValues;
@@ -71,19 +71,10 @@ public class Registers {
    */
   @Override
   public String toString() {
-    var builder = new StringBuilder();
-    builder.append("REGISTER VALUES\n");
-    for (var entry : registerValues.entrySet()) {
-      builder
-              .append(entry.getKey())
-              .append(" ")
-              .append(entry.getValue())
-              .append('\n');
+    try {
+      return jsonMapper.writeValueAsString(registerValues);
+    } catch (JsonProcessingException e) {
+      return "{}";
     }
-    return builder.toString();
-  }
-
-  public String toJson() throws JsonProcessingException {
-    return jsonMapper.writeValueAsString(registerValues);
   }
 }

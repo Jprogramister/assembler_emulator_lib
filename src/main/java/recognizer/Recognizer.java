@@ -46,8 +46,8 @@ public final class Recognizer {
    * @return {@link State}
    */
   public static State recognize(ParseTree tree) {
-    final var listener = new AssemblerListener();
-    new ParseTreeWalker().walk(listener, tree);
-    return new State(listener);
+    var walker = new AstWalker();
+    new ParseTreeWalker().walk(walker, tree);
+    return new State(walker);
   }
 }

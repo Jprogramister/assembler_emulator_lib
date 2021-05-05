@@ -16,15 +16,11 @@ public class Labels {
   @Override
   public String toString() {
     try {
-      return toJson();
+      return jsonMapper.writeValueAsString(labels);
     } catch (JsonProcessingException e) {
       log.error("LabelsContext to json mapping error", e);
       return "{}";
     }
-  }
-
-  public String toJson() throws JsonProcessingException {
-    return jsonMapper.writeValueAsString(labels);
   }
 
   /**

@@ -8,17 +8,19 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 public class RecognizerTest {
   @Test
   public void recognizeTest() throws IOException {
     testRecognition(CodeSamples.ALL);
   }
 
-  @SneakyThrows
-  private static void testRecognition(String code) {
+  private static void testRecognition(String code) throws IOException {
     State state = Recognizer.recognize(code);
-    Assert.assertNotNull(state);
-    // Assert.assertNotEquals(0, state.getStatementsSet().size());
+    assertNotNull(state);
+    assertEquals(8, state.statementsCount());
     System.out.printf("context.State created from code \n %s %s%n", code, state.toString());
   }
 }
